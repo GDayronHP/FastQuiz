@@ -1,0 +1,419 @@
+@import url('variables.module.css');
+
+/* aside */
+
+.finishQuiz a,
+.refuseQuiz a,
+.backBtn a {
+  text-decoration: none;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+body {
+  position: relative;
+}
+/* Side bar */
+
+.config-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  color: black;
+  background-color: white;
+}
+
+@media (max-width: 700px) {
+  .side-bar {
+    position: absolute;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .toggleBtn {
+    position: absolute;
+    height: 100%;
+    z-index: 2;
+  }
+}
+
+.config-options {
+  padding: 20px;
+}
+
+.backBtn {
+  background-color: var(--gray);
+  margin-bottom: 10px;
+  padding: var(--input-padding);
+  border-radius: var(--border-size);
+  transition: all 0.1s ease-in-out;
+  font-size: 15px;
+  border: none;
+}
+
+.backBtn a {
+  display: flex;
+  align-items: center;
+}
+
+.backBtn img {
+  margin-right: 5px;
+  height: 25px;
+  transform: rotate(180deg);
+}
+
+.backBtn:hover {
+  background-color: var(--gray-hover);
+  border-radius: var(--border-size);
+  cursor: pointer;
+}
+
+.infoContainer {
+  height: auto-fit;
+  margin: 10px 0;
+}
+
+.infoContainer h1 {
+  font-family: var(--yaldevi-font);
+  font-size: 30px;
+}
+
+.infoContainer h2 {
+  font-family: var(--poppins-font);
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.infoContainer a {
+  text-decoration: none;
+}
+
+.approved-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.approved-count {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 15px;
+  margin: 10px 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+}
+
+.approved {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px 0px 10px 0px;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.approved div {
+  background-color: rgb(235, 235, 235);
+  margin-bottom: 10px;
+  padding: 7px;
+  border-radius: var(--border-size);
+  transition: all 0.1s ease-in;
+}
+
+.approved div:hover {
+  background-color: rgb(223, 223, 223);
+  cursor: pointer;
+}
+
+.finishQuiz {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: var(--input-padding);
+  border-radius: var(--border-size);
+  transition: all 0.1s ease-in-out;
+  font-size: 15px;
+  background-color: black;
+}
+
+.finishQuiz a {
+  font-family: var(--poppins-font);
+  color: white;
+}
+
+.refuseQuiz {
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  padding: var(--input-padding);
+  transition: all 0.1s ease-in-out;
+  font-size: 15px;
+  width: 100%;
+  border: 1px 0 0 0 solid black;
+}
+
+.refuseQuiz a {
+  font-family: var(--poppins-font);
+  color: black;
+}
+
+.refuseQuiz:hover {
+  background-color: var(--gray-hover);
+}
+/* ------------------------------------------- */
+
+/* Button to toogle sideBar */
+
+.toggleBtn {
+  transition: all 0.2s ease-in-out;
+  background: var(--gray);
+  border: none;
+  padding: 0 2px 0 2px;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  border-right: 1px solid black;
+}
+
+.toggleBtn:hover {
+  background-color: var(--gray-hover);
+  cursor: pointer;
+  border-radius: 0px;
+}
+
+/* ------------------------------------------- */
+
+.preview {
+  font-family: var(--poppins-font);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.preview p {
+  padding: 5px 10px;
+  color: yellow;
+}
+
+@media (max-width: 700px) {
+  .preview p {
+    padding-left: 30px;
+    width: 10px;
+  }
+}
+
+.main-content {
+  background-image: var(--bg-primary-to-b);
+  position: relative;
+  padding: 70px 20px 20px 20px;
+  color: white;
+}
+
+.main-content .action {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, -50%);
+}
+
+.main-content .action h1 {
+  text-align: center;
+  font-family: var(--poppins-font);
+  font-weight: normal;
+  border-radius: 30px;
+  font-size: medium;
+  padding: 50px 15px 10px 15px;
+  background-color: black;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .main-content {
+    margin-left: 15px;
+  }
+}
+
+.question-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-container .question {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  font-size: clamp(22px, 6vw, 60px);
+  height: clamp(70px, 20dvw, 140px);
+  font-family: var(--roboto-font);
+  text-align: center;
+}
+
+.question-actions {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  padding: 10px;
+  left: 0%;
+  bottom: 0%;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: black;
+  margin-top: 10px;
+}
+
+.question-actions button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+}
+
+.question-actions button a {
+  text-decoration: none;
+}
+
+.alternatives-container {
+  font-size: clamp(11px, 2vw, 20px);
+  font-family: var(--poppins-font);
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 50dvh;
+  width: clamp(300px, 100%, 1000px);
+  justify-content: space-around;
+}
+
+.alternative {
+  
+  background-color: var(--normal-answer);
+  width: 100%;
+  padding: clamp(20px, 1.4vw, 30px);
+  box-shadow: 0px 5px 0px var(--normal-answer-shadow);
+  height: fit-content;
+  border-radius: 10px;
+}
+
+.alternative label {
+  display: flex;
+  align-items: center;
+}
+
+.alternative span {
+  font-weight: medium;
+  font-size: 25px;
+  margin: 0px 15px 0px 15px;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.alternative input:hover {
+  cursor: pointer;
+}
+
+.alternative label:hover {
+  cursor: pointer;
+}
+
+.refuseQuestion a,
+.acceptQuestion a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  font-size: larger;
+  color: black;
+  border-right: 1px solid white;
+}
+
+button.refuseQuestion,
+button.acceptQuestion {
+  font-family: var(--poppins-font);
+  font-size: clamp(12px, 1rem, 18px);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: clamp(250px, 1rem, 300px);
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+button.refuseQuestion img,
+button.acceptQuestion img {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+button.refuseQuestion {
+  background-color: var(--refuse-question);
+  transition: background-color 0.2s ease-out;
+  margin-right: 10px;
+}
+
+button.refuseQuestion:hover {
+  background-color: var(--refuse-question-hover);
+}
+
+button.acceptQuestion {
+  background: var(--accept-question);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  transition: background-position 0.2s ease;
+  color: white;
+  border-radius: 5px;
+}
+
+button.acceptQuestion:hover {
+  background-position: 100% 50%;
+}
+
+/* Options decoration */
+
+.bigBack,
+.bigNext {
+  position: absolute;
+  z-index: 2;
+}
+
+.bigBack {
+  height: 80%;
+  top: 20px;
+  left: 20px;
+}
+
+.bigNext {
+  height: 80%;
+  top: 20px;
+  right: 20px;
+}

@@ -1,0 +1,98 @@
+:root {
+  --bg-primary-to-b: linear-gradient(180deg, #003046, #002335);
+  --bg-primary-to-t: linear-gradient(180deg, #002335, #003046);
+  --bg-primary: #004669;
+  --bg-primary-hover: #00689c;
+  --bg-secondary: #051725;
+  --bg-secondary-hover: #00233f;
+  --bg-tertiary: #002335;
+  --bg-tertiary-hover: #00293d;
+  --btn-color: #fff;
+  --btn-hover: #dddddd;
+  --black: #000000;
+  --black-hover: #3f3f3f;
+  --white: #ffffff;
+  --white-hover: #b3b3b3;
+  --gray: #dbdbdb;
+  --gray-hover: #c7c7c7;
+
+  /* Gradients */
+
+  --g-white-purple: linear-gradient(90deg, #fff, #5e00ff);
+
+  --secondary-color: #5e00ff;
+  --secondary-color-hover: #3c00a5;
+
+  --correct-answer: linear-gradient(90deg, #008bd0, #00cfde);
+  --correct-answer-shadow: #00e2f242;
+  --normal-answer: #008cff;
+  --normal-answer-shadow: #008cff50;
+
+  --accept-question: linear-gradient(90deg, #5bd894, #30724e);
+  --accept-question-hover: linear-gradient(90deg, #30724e, #5bd894);
+  --refuse-question: #e0e0e0;
+  --refuse-question-hover: #cfcfcf;
+
+  /* Font sizes */
+
+  --big-title-size: 70px;
+  --normal-size: 15px;
+  --title-size: 35px;
+  --important-size: 30px;
+
+  --button-size: 25px;
+
+  /* Colors */
+
+  --link-color: #008cff;
+  --link-color-hover: #00689c;
+
+  --padding-size: 25px;
+  --input-padding: 7px;
+  --border-size: 10px;
+
+  /* Fonts */
+
+  --yaldevi-font: "Yaldevi", serif;
+  --poppins-font: "Poppins", sans-serif;
+  --roboto-font: "Roboto", sans-serif;
+}
+
+/* Formateo */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navBar {
+  background-color: var(--bg-secondary);
+  height: 45px;
+  padding: var(--padding-size);
+}
+
+.navBar ul {
+  height: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navBar li a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.dashboard {
+  background-color: var(--bg-tertiary);
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.1s ease-out;
+}
+
+.dashboard:hover {
+  background-color: var(--bg-tertiary-hover);
+}

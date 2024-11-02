@@ -1,0 +1,78 @@
+@import url('variables.module.css');
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--white);
+    background-image: var(--bg-primary-to-t)
+}
+
+.terms-container {
+    padding: 10px 500px;
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--link-color);
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #2980b9;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+    .terms-container {
+        padding: 10px 100px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .terms-container {
+        padding: 10px 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+}

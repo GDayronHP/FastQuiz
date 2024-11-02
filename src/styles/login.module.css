@@ -1,0 +1,222 @@
+@import url('variables.module.css');
+
+body{
+    position: relative;
+    background-color: var(--bg-secondary);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bg-images img{
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    bottom: -10%;
+    left: 0;
+    opacity: 25%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* ------------------- */
+
+h1, h2, h3, p {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Excepcion personalizada */
+
+.toRegister p{
+    margin: 0;
+    font-family: var(--yaldevi-font);
+}
+
+.auth-container p {
+    margin: 0;
+    text-align: start;
+    width: 100%;
+}
+
+/* ------------------- */
+
+.login-card,
+.register-card {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: var(--black);
+    display: flex;
+    color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+.login-information,
+.register-information{
+    width: 480px;
+    font-family: var(--poppins-font);
+    display: flex;
+    padding: 40px 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-information h1, 
+.register-information h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 35px;
+
+}
+
+.login-information h2, 
+.register-information h2{
+    font-family: var(--poppins-font);
+    font-weight: normal;
+    font-size: 17px;
+}
+
+.login-information h3, 
+.register-information h3 {
+    font-family: var(--poppins-font);
+    font-weight: normal ;
+    font-size: 15px;
+    text-align: start;
+}
+
+/* Oauth */
+
+#app{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.auth-container{
+    font-size: 13px;
+    color:var(--black);
+    background-color: var(--white);
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .3s ease-in-out;
+}
+
+.auth-container img{
+    padding-right: 10px;
+}
+
+.auth-container:hover{
+    background-color: var(--btn-hover);
+    cursor: pointer;
+}
+
+/* ------------------- */
+
+.toRegister,
+.toLogin{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.toRegister:hover,
+.toLogin:hover{
+    cursor: pointer;
+    background-color: #ffffff2d;
+
+}
+
+.toRegister .icon,
+.toLogin .icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 0;
+}
+
+.login-image img,
+.register-image img{
+    width: 350px;
+    height: 100%;
+    padding: 0;
+}
+
+.hideForm{
+    animation: hideForm .5s ease-in-out forwards;
+}
+
+.showForm{
+    animation: showForm .5s ease-in-out forwards;
+}
+
+
+
+/* Animacion para mover los form cards */
+
+@keyframes hideForm {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-150%, -50%);
+        opacity: 0;
+    }
+}
+
+@keyframes showForm {
+    0% {
+        transform: translate(150%, -50%); 
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%); 
+        opacity: 1;
+    }
+}
+
+/* Puntos de quiebre */
+
+@media screen and (max-width: 1150px) {
+    .login-image,
+    .register-image{
+        display: none;
+        width: 0px;
+        height: 0px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    
+    .login-card,
+    .register-card{
+        width: 80%;
+    }
+
+    .login-information,
+    .register-information{
+        padding: 20px 40px;
+    }
+
+    .bg-images img {
+        bottom: 0;
+    }
+}
