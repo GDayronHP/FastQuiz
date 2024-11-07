@@ -1,0 +1,102 @@
+.modes-navBar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.modes-navBar ul {
+  font-size: clamp(8px, 13px, 17px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  background-color: var(--white);
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.selected {
+  background-color: var(--secondary-color);
+  padding: 10px;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 10px;
+  border-width: 0;
+  color: white;
+  transition: background-color 0.2s ease-out;
+}
+
+.selected:hover {
+  background-color: var(--secondary-color-hover);
+  cursor: pointer;
+}
+
+.non-selected {
+  color: var(--black);
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  border-width: 0;
+  border-radius: 10px;
+  transition: background-color 0.2s ease-out;
+}
+
+.non-selected:hover {
+  background-color: var(--btn-hover);
+  cursor: pointer;
+}
+
+.file-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 600px;
+  max-height: 350px;
+  width: calc(100% - 450px);
+  height: calc(100vh - 500px);
+  border: 2px solid var(--white);
+  border-style: dashed;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 1);
+}
+.file-container:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.file-container p {
+  text-wrap: wrap;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bolder;
+}
+
+.file-container span {
+  background-image: linear-gradient(90deg, #b68cff, #5e00ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.prompt-container {
+  font-family: var(--poppins-font);
+  font-size: 15px;
+  padding: 10px;
+  text-wrap: wrap;
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  min-width: 350px;
+  min-height: 300px;
+  max-height: 350px;
+  max-width: 600px;
+  width: calc(100% - 450px);
+  height: calc(100vh - 500px);
+  border: 2px solid var(--white);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 1);
+}

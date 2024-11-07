@@ -4,7 +4,9 @@ import FileAlert from "../components/fileAlert";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import styles from "../styles/principalPage.module.css";
+import nextRow from "../assets/icons/nextRow.svg";
+
+import styles from "../styles/principalPage.module.scss";
 
 const PrincPg = () => {
   const mainRef = useRef(null);
@@ -25,7 +27,7 @@ const PrincPg = () => {
   }
 
   return (
-    <React.Fragment>
+    <div className={styles.princPg}>
       <main className={styles["main-page"]} ref={mainRef}>
         <motion.h1
           className={styles.title}
@@ -73,16 +75,23 @@ const PrincPg = () => {
             delay: 0.3,
           }}
         >
-          <Modes showAdvise={showAdvise} />
+          <Modes showAdvise={showAdvise} enabled={true} />
 
-          <Link className={styles.continueBtn} to="/quizDetails">
-            <button>Continuar</button>
-          </Link>
+          <div className={styles["backToContainer"]}>
+            <Link to="/" className={styles.atras}>
+              Atrás
+            </Link>
+
+            <Link to="/quizDetails/data" className={styles["continueBtn"]}>
+              <button className={styles.continuar}>Continuar</button>
+              <img src={nextRow}></img>
+            </Link>
+          </div>
         </motion.section>
       </main>
 
       {advise && <FileAlert hideAdvise={hideAdvise} />}
-    </React.Fragment>
+    </div>
   );
 };
 

@@ -1,18 +1,24 @@
 import React from "react";
-
-import styles from '../styles/variables.module.css'
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav className={styles.navBar}>
+    <nav className="navBar">
       <ul>
+        <div className="left">
+          <li>
+            <a className="logo" href="#">
+              Logo
+            </a>
+          </li>
+          <li>
+            <Link className="logo" to="/principalPage">
+              Home
+            </Link>
+          </li>
+        </div>
         <li>
-          <a className={styles.logo} href="#">
-            Logo
-          </a>
-        </li>
-        <li>
-          <a className={styles.dashboard} href="#">
+          <a className="dashboard" href="#">
             Mi dashboard
           </a>
         </li>

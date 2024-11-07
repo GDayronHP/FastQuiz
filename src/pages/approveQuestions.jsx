@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Question from "../components/question.jsx";
 import { Link } from "react-router-dom";
 
-import styles from '../styles/approveQUestions.module.css';
+import styles from "../styles/approveQuestions.module.scss";
 
 import backRow from "../assets/icons/nextRow.svg";
 import nextRow from "../assets/icons/nextRow.svg";
@@ -45,6 +45,7 @@ const ApproveQuestions = () => {
 
   return (
     <motion.div
+      className={styles.quizManagement}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -76,7 +77,7 @@ const ApproveQuestions = () => {
           >
             <div className={styles["config-options"]}>
               <button className={styles["backBtn"]}>
-                <Link to="/quizDetails">
+                <Link to="/quizDetails/:data">
                   <img src={backRow} alt="backIcon" />
                   Volver
                 </Link>
@@ -102,7 +103,10 @@ const ApproveQuestions = () => {
                   </div>
                 </div>
               </div>
-              <div className={styles["questionsContainer"]} ref={questionsContainer}></div>
+              <div
+                className={styles["questionsContainer"]}
+                ref={questionsContainer}
+              ></div>
               <button className={styles["finishQuiz"]}>
                 <a href="#">Finalizar Cuestionario</a>
               </button>

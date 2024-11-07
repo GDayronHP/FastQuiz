@@ -1,0 +1,235 @@
+.quiz-details {
+  body {
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    color: var(--white);
+    font-family: Arial, sans-serif;
+    background-image: var(--bg-primary-to-b);
+  }
+
+  .forms {
+    padding: 20px 200px;
+  }
+
+  .title {
+    font-family: var(--bebas-font);
+    letter-spacing: 5px;
+    font-size: clamp(15px, 2.3vw, 35px);
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .question-forms {
+    font-family: var(--roboto-font);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-items: center;
+  }
+
+  .questions-qty,
+  .questions-type,
+  .form-difficulty {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 82%;
+  }
+
+  .questions-qty label,
+  .questions-type label,
+  .form-difficulty label {
+    font-family: var(--poppins-font);
+    margin-bottom: 10px;
+    text-align: start;
+  }
+
+  .questions-qty input,
+  .questions-type select,
+  .form-difficulty select {
+    color: var(--black);
+    padding: var(--input-padding);
+    border-radius: var(--border-size);
+  }
+
+  .slideContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 60px;
+  }
+
+  /* Estilos para los cuestionarios*/
+
+  .styles-container {
+    padding: 20px;
+    background-color: #002b41;
+    font-family: var(--roboto-font);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .styles {
+    width: 70%;
+  }
+
+  .style {
+    padding: 50px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .textContainer {
+    width: 100%;
+    overflow-x: hidden;
+    text-align: center;
+  }
+
+  .textContainer h2 {
+    padding: 0px 5px;
+    font-size: clamp(30px, 8vw, 100px);
+    font-family: var(--bebas-font);
+    text-shadow: 10px 10px 10px black;
+    letter-spacing: 8px;
+    padding-bottom: 5px;
+    font-weight: 1000;
+    transform: var(--inclination);
+    text-shadow: -10px 10px 0px black;
+  }
+
+  .textContainer p {
+    font-family: var(--poppins-font);
+    font-size: clamp(15px, 1.5vw, 30px);
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .style img {
+    height: 100%;
+    width: 250px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilo para la imagen seleccionada */
+
+  .image-selected {
+    position: relative;
+    animation: selectedImage 0.5s cubic-bezier(1, 0, 0.93, 0.1) forwards;
+  }
+
+  .image-selected-p {
+    font-family: var(--poppins-font);
+    color: white;
+    font-size: clamp(15px, 1.5vw, 20px);
+    font-weight: 600;
+    position: absolute;
+    animation: show-selected-p 0.5s cubic-bezier(1, 0, 0.93, 0.1) forwards;
+  }
+  .selected-style-p {
+    text-align: center;
+  }
+
+  /* --------------------------------------- */
+
+  /* ContinueTo Buttons */
+
+  .backToContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .continueBtn {
+    display: flex;
+    background-color: white;
+    font-family: var(--poppins-font);
+    font-weight: 500;
+    margin: 20px 0px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    color: var(--black);
+    transition: background-color 0.2s ease-out;
+  }
+
+  .continueBtn img {
+    width: 20px;
+  }
+
+  .atras {
+    font-size: 15px;
+    padding-right: 15px;
+    color: white;
+  }
+
+  .continueBtn button {
+    font-size: 15px;
+    font-weight: 550;
+    cursor: pointer;
+  }
+
+  .continueBtn:hover {
+    background-color: var(--white-hover);
+    cursor: pointer;
+  }
+}
+
+/* Puntos de quiebre */
+
+@media (max-width: 1540px) {
+  .quiz-details .forms {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 450px) {
+  .quiz-details .forms {
+    padding: 0px;
+  }
+}
+
+/* ----------------------------------------- */
+
+/* Animaciones */
+
+@keyframes selectedImage {
+  0% {
+    box-shadow: none !important;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: 1px solid white;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    // box-shadow: 15px 0px 15px rgba(255, 255, 255, 0.1), -15px 15px 0px black;
+    filter: brightness(50%);
+    rotate: -5deg;
+  }
+}
+
+@keyframes show-selected-p {
+  0% {
+    opacity: 0;
+    scale: 3;
+  }
+  100% {
+    opacity: 1;
+    rotate: 5deg;
+    scale: 1;
+    text-shadow: 0px 0px 25px rgb(255, 255, 255);
+  }
+}
+
+/* ----------------------------------------- */

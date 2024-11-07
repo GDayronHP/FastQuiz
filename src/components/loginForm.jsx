@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from "../styles/login.module.css";
+import styles from "../styles/login.module.scss";
 
 
 const Login = ({src, alt, text}) => {

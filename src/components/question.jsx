@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-import styles from '../styles/approveQuestions.module.css'
+import styles from '../styles/approveQuestions.module.scss'
 
 const Question = ({ question, alternatives }) => {
   

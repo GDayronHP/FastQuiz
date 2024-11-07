@@ -8,6 +8,8 @@ import SecondLayout from "./layouts/secondLayout";
 import ApproveQuestions from "./pages/approveQuestions";
 import Conditions from "./pages/conditions";
 
+import './styles/global.scss';
+
 function App() {
   return (
     <Router>
@@ -37,7 +39,7 @@ function App() {
           }
         />
         <Route
-          path="/quizDetails"
+          path="/quizDetails/:content"
           element={
             <MainLayout title="Detalles del Quiz">
               <QuizDetails />
