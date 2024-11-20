@@ -1,0 +1,45 @@
+.quizReview {
+  padding: var(--normal-padding);
+}
+
+.saveContainer {
+  font-family: var(--font-body);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.saveContainer p {
+  color: var(--green-color);
+  font-size: 0.8em;
+}
+
+.saveBtn {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  background-color: var(--green-color);
+  padding: var(--input-padding);
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.saveBtn:hover {
+  background-color: var(--green-color-hover);
+}
+.saveBtn p {
+  color: black;
+  font-size: 0.9em;
+}
+
+.saveBtn img {
+  height: 20px;
+  width: 20px;
+  margin-left: 5px;
+}
+
+@media (max-width: 1500px) {
+  .quizReview {
+    padding: var(--normal-padding-media);
+  }
+}

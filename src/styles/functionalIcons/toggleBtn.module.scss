@@ -1,0 +1,45 @@
+.toggleBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+
+  .toggleBtn {
+    position: relative;
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+
+  .rectangle {
+    transition: fill 0.3s ease;
+  }
+
+  .rectangleActive {
+    fill: var(--secondary-color);
+  }
+
+  .rectangleInactive {
+    fill: white;
+  }
+
+  .circle {
+    transition: transform 0.3s ease;
+    position: absolute;
+  }
+
+  .circleActive {
+    fill: white;
+    transform: translateX(calc(100% - 19px));
+  }
+
+  .circleInactive {
+    fill: black;
+  }
+
+  p {
+    font-size: 0.85em;
+    margin-right: 10px;
+  }
+}

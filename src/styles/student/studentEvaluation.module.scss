@@ -1,0 +1,9 @@
+.studentEvaluation {
+    padding: var(--normal-padding);
+}
+
+@media (max-width: 1540px) {
+    .studentEvaluation {
+        padding: var(--normal-padding-media);
+    }
+}

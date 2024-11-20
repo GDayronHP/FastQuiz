@@ -1,7 +1,9 @@
 /* @import url('variables.module.css'); */
 
 .princPg {
-  padding: 20px 250px;
+  padding: var(--normal-padding);
+  font-family: var(--roboto-font);
+  font-weight: 400;
 
   main {
     transition: filter 0.1s ease-in-out;
@@ -13,7 +15,6 @@
   }
 
   /* Main page */
-
   .slide-modes {
     display: flex;
     width: 100%;
@@ -22,34 +23,31 @@
   }
 
   .title {
-    font-family: 'Inter';
-    font-size: clamp(2rem, 6.1vw, 5rem);
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 6vw, 4.5rem);
     text-align: center;
+    line-height: 1.2;
     margin-bottom: 25px;
-  }
 
-  .title span {
-    background-image: linear-gradient(90deg, #b68cff, #5e00ff);
-    -webkit-background-clip: text;
-    color: transparent;
+    span {
+      background-image: linear-gradient(90deg, #b68cff, #5e00ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
   }
 
   .phrase {
-    font-family: var(--poppins-font);
-    font-size: clamp(1rem, 2vw, 1.8rem);
-    font-weight: normal;
+    font-family: var(--font-secondary);
+    font-size: clamp(1rem, 2vw, 1.6rem);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0 10vw;
     text-align: center;
+    font-weight: normal;
     margin-top: 20px;
     margin-bottom: 20px;
   }
 
-  #appPage {
-    width: 100vw;
-    height: 100vh;
-  }
-
   /* fileAlert.jsx */
-
   .file-alert {
     position: absolute;
     width: 90%;
@@ -62,117 +60,75 @@
     border: 2px solid var(--g-white-purple);
     border-radius: var(--border-size);
     text-align: center;
-  }
 
-  .file-alert .infoTxt {
-    font-size: larger;
-    color: var(--black);
-    margin-bottom: 25px;
-  }
+    .infoTxt {
+      font-size: larger;
+      color: var(--black);
+      margin-bottom: 25px;
+    }
 
-  .file-alert .moreInfo {
-    font-size: var(--small-size);
-    color: var(--black);
-    margin-bottom: 25px;
-  }
+    .moreInfo {
+      font-size: var(--small-size);
+      color: var(--black);
+      margin-bottom: 25px;
 
-  .file-alert .moreInfo a {
-    color: var(--link-color);
-    text-decoration: none;
-    transition: color 0.1s ease-out;
-  }
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.1s ease-out;
 
-  .file-alert .moreInfo a:hover {
-    text-decoration: underline;
-  }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
 
-  .file-alert .continueBtn {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: var(--input-padding);
-    transition: all 0.1s ease-out;
-    border: none;
-  }
+    .continueBtn {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--input-padding);
+      transition: all 0.1s ease-out;
+      border: none;
 
-  .file-alert .continueBtn:hover {
-    background-color: var(--btn-hover);
-    border-radius: var(--border-size);
-    cursor: pointer;
-  }
+      &:hover {
+        background-color: var(--btn-hover);
+        border-radius: var(--border-size);
+        cursor: pointer;
+      }
 
-  .file-alert .continueBtn p {
-    padding-right: 5px;
-    font-size: medium;
-  }
+      p {
+        padding-right: 5px;
+        font-size: medium;
+      }
+    }
 
-  .file-alert .closeBtn {
-    padding: 5px;
-    height: 35px;
-    background-color: var(--gray);
-    border-radius: 100%;
-    position: absolute;
-    top: calc(0% - 15px);
-    right: calc(0% - 15px);
-    transition: all 0.1s ease-out;
-  }
+    .closeBtn {
+      padding: 5px;
+      height: 35px;
+      background-color: var(--gray);
+      border-radius: 100%;
+      position: absolute;
+      top: calc(0% - 15px);
+      right: calc(0% - 15px);
+      transition: all 0.1s ease-out;
 
-  .file-alert .closeBtn:hover {
-    background-color: var(--gray-hover);
-    cursor: pointer;
-  }
+      &:hover {
+        background-color: var(--gray-hover);
+        cursor: pointer;
+      }
+    }
 
-  .file-alert .nextRow {
-    width: 15px;
-  }
-
-  /* ContinueTo Buttons */
-
-  .backToContainer {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .continueBtn {
-    display: flex;
-    background-color: white;
-    font-family: var(--poppins-font);
-    font-weight: 500;
-    margin: 20px 0px;
-    padding: 0px 10px;
-    border-radius: 10px;
-    color: var(--black);
-    transition: background-color 0.2s ease-out;
-  }
-
-  .continueBtn img {
-    width: 20px;
-  }
-
-  .atras {
-    font-size: 15px;
-    padding-right: 15px;
-    color: white;
-  }
-
-  .continueBtn button {
-    font-size: 15px;
-    font-weight: 550;
-    cursor: pointer;
-  }
-
-  .continueBtn:hover {
-    background-color: var(--white-hover);
-    cursor: pointer;
+    .nextRow {
+      width: 15px;
+    }
   }
 }
 
 @media (max-width: 1540px) {
   .princPg {
-    padding: 20px;
+    padding: var(--normal-padding-media);
   }
 }

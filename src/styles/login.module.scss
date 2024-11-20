@@ -36,7 +36,7 @@
 
   .toRegister p {
     margin: 0;
-    font-family: var(--yaldevi-font);
+    font-family: var(--font-heading);
   }
 
   .auth-container p {
@@ -63,7 +63,7 @@
   .login-information,
   .register-information {
     width: 480px;
-    font-family: var(--poppins-font);
+    font-family: var(--font-secondary);
     display: flex;
     padding: 40px 60px;
     flex-direction: column;
@@ -79,14 +79,14 @@
 
   .login-information h2,
   .register-information h2 {
-    font-family: var(--poppins-font);
+    font-family: var(--font-secondary);
     font-weight: normal;
     font-size: 17px;
   }
 
   .login-information h3,
   .register-information h3 {
-    font-family: var(--poppins-font);
+    font-family: var(--font-secondary);
     font-weight: normal;
     font-size: 15px;
     text-align: start;

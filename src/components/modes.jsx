@@ -5,11 +5,20 @@ import styles from "../styles/components/mode.module.scss";
 
 import upload from "../assets/icons/upload.svg";
 
-const Modes = ({ showAdvise, enabled, data }) => {
-
+const Modes = ({ showAdvise, enabled, action, setAction, data }) => {
   const [mode, setMode] = useState("file-mode");
   const [fileName, setFileName] = useState(null);
 
+  /* Definir una acción al enviar cierto dato del */
+
+  function definirAction(event) {
+    const promptValue = event.target.value;
+    if (action !== undefined) {
+      setAction(promptValue);
+    }
+  }
+
+  /* Cambiar de modo */
   function changeMode(newMode) {
     if (newMode !== mode) {
       setMode(newMode);
@@ -62,7 +71,8 @@ const Modes = ({ showAdvise, enabled, data }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.1 }}
+              whileHover={{ cursor: "not-allowed" }}
             >
               <input
                 type="file"
@@ -73,7 +83,8 @@ const Modes = ({ showAdvise, enabled, data }) => {
               />
               <img src={upload} alt="Upload icon" />
               <p>
-                Archivo seleccionado: <span style={{ textAlign: "center" }}>{data.value}</span>
+                Archivo seleccionado:{" "}
+                <span style={{ textAlign: "center" }}>{data.value}</span>
               </p>
             </motion.div>
           ) : (
@@ -99,7 +110,8 @@ const Modes = ({ showAdvise, enabled, data }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.1 }}
+              whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
               <input
                 type="file"
@@ -108,7 +120,9 @@ const Modes = ({ showAdvise, enabled, data }) => {
                 accept=".pdf, .ppt, .doc, .docx, .txt"
                 onChange={handleFileChange}
               />
-              <img src={upload} alt="Upload icon" />
+              <div className={styles.uploadContainer}>
+                <img src={upload} alt="Upload icon" />
+              </div>
               <p>
                 {fileName ? (
                   <span style={{ textAlign: "center" }}>{fileName}</span>
@@ -130,6 +144,8 @@ const Modes = ({ showAdvise, enabled, data }) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               placeholder="Escribe un prompt..."
+              onChange={(event) => definirAction(event)}
+              required={true}
             />
           )}
         </AnimatePresence>

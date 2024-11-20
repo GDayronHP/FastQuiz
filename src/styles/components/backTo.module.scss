@@ -1,0 +1,43 @@
+/* backTo Buttons */
+
+.backToContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.continueBtn {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  margin: 20px 0px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  color: var(--black);
+  transition: background-color 0.2s ease-out;
+}
+
+.continueBtn img {
+  width: 15px;
+}
+
+.atras {
+  font-size: 15px;
+  padding-right: 15px;
+  color: white;
+}
+
+.continueBtn button {
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  color: var(--black)
+}
+
+.continueBtn:hover {
+  background-color: var(--white-hover);
+  cursor: pointer;
+}

@@ -117,6 +117,7 @@ const ApproveQuestions = () => {
           </motion.aside>
         )}
       </motion.section>
+
       <motion.button
         className={styles["toggleBtn"]}
         initial={{ opacity: 0 }}
@@ -139,29 +140,29 @@ const ApproveQuestions = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <div className={styles["preview"]} style={{ color: "white" }}>
-          <p>Vista previa</p>
-        </div>
-        <div className={styles["action"]}>
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            Pregunta a evaluar
-          </motion.h1>
-        </div>
-        <div className={styles["question-container"]}>
-          <Question
-            question="¿Cuál es la primera fase de SCRUM?"
-            alternatives={[
-              "Inicio",
-              "Planificación y estimación",
-              "Implementación",
-              "Lanzamiento",
-            ]}
-          />
-        </div>
+        <header className={styles.header}>
+          <div className={styles.preview} style={{ color: "white" }}>
+            <p>Vista previa</p>
+          </div>
+          <div className={styles["action"]}>
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              Pregunta a evaluar
+            </motion.h1>
+          </div>
+        </header>
+        <Question
+          question="¿Cuál es la primera fase de SCRUM?"
+          alternatives={[
+            "Inicio",
+            "Planificación y estimación",
+            "Implementación",
+            "Lanzamiento",
+          ]}
+        />
         <motion.div
           className={styles["question-actions"]}
           initial={{ opacity: 0, y: 100 }}
@@ -194,7 +195,7 @@ const ApproveQuestions = () => {
               stiffness: 150,
             }}
           >
-            <a href="">Aceptar</a>
+            <Link to="/quizReview">Aceptar</Link>
             <img src={plus} alt="plus" />
           </motion.button>
           <img className={styles.bigNext} src={bigNext} alt="" />

@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+
+/* Components */
+
+import BackTo from "../components/backTo";
 import QuizStyle from "../components/quizStyle";
 import Modes from "../components/modes.jsx";
 
-import nextRow from "../assets/icons/nextRow.svg";
+/* ----------- */
 
 import styles from "../styles/quizDetails.module.scss";
 
@@ -165,14 +168,7 @@ const QuizDetails = () => {
           delay: 0.7,
         }}
       >
-        <div className={styles["backToContainer"]}>
-          <Link to="/principalPage" className={styles.atras}>Atrás</Link>
-
-          <Link  to="/quizManagement" className={styles["continueBtn"]}>
-            <button className={styles.continuar}>Continuar</button>
-            <img src={nextRow}></img>
-          </Link>
-        </div>
+        <BackTo backTo={"/quizDetails/hola"} nextTo={"/quizManagement"}  />
       </motion.div>
     </div>
   );

@@ -1,6 +1,9 @@
 .modes-navBar {
   margin-top: 20px;
   margin-bottom: 20px;
+  min-width: 300px;
+  max-width: 600px;
+  width: calc(100% - 450px);
 }
 
 .modes-navBar ul {
@@ -9,40 +12,35 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 10px;
-  background-color: var(--white);
-  padding: 10px;
-  border-radius: 20px;
+  background-color: var(--white-o);
+  padding: 5px;
+  border-radius: var(--normal-radius)
 }
 
 .selected {
   background-color: var(--secondary-color);
   padding: 10px;
   font-weight: bold;
-  margin-right: 5px;
-  margin-left: 5px;
-  border-radius: 10px;
   border-width: 0;
-  color: white;
+  color: var(--white);
   transition: background-color 0.2s ease-out;
-}
-
-.selected:hover {
-  background-color: var(--secondary-color-hover);
+  width: 50%;
   cursor: pointer;
 }
 
+
 .non-selected {
-  color: var(--black);
-  margin-right: 5px;
-  margin-left: 5px;
+  color: var(--white);
+  opacity: 0.5;
   padding: 10px;
   border-width: 0;
-  border-radius: 10px;
   transition: background-color 0.2s ease-out;
+  width: 50%;
 }
 
 .non-selected:hover {
-  background-color: var(--btn-hover);
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
 }
 
@@ -52,22 +50,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--normal-radius);
   min-width: 300px;
   min-height: 300px;
   max-width: 600px;
   max-height: 350px;
   width: calc(100% - 450px);
   height: calc(100vh - 500px);
-  border: 2px solid var(--white);
+  border: 2px solid var(--white-o);
   border-style: dashed;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 1);
+  box-shadow: 0 3px 15px rgba(255, 255, 255, 0.15);
 }
+
 .file-container:hover {
-  background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
+}
+
+.file-container .uploadContainer {
+  border-radius: 50%;
+  padding: 10px;
 }
 
 .file-container p {
@@ -78,25 +81,26 @@
 }
 
 .file-container span {
-  background-image: linear-gradient(90deg, #b68cff, #5e00ff);
+  background-color: #8C83FB;
   -webkit-background-clip: text;
   color: transparent;
+
 }
 
 .prompt-container {
-  font-family: var(--poppins-font);
+  font-family: var(---font-secondary);
   font-size: 15px;
   padding: 10px;
   text-wrap: wrap;
   color: var(--white);
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: var(--normal-radius);
   min-width: 350px;
   min-height: 300px;
   max-height: 350px;
   max-width: 600px;
   width: calc(100% - 450px);
   height: calc(100vh - 500px);
-  border: 2px solid var(--white);
+  border: 2px solid var(--white-o);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 1);
 }

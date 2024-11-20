@@ -7,8 +7,10 @@ import MainLayout from "./layouts/mainLayout";
 import SecondLayout from "./layouts/secondLayout";
 import ApproveQuestions from "./pages/approveQuestions";
 import Conditions from "./pages/conditions";
+import QuizReview from "./pages/quizReview";
 
-import './styles/global.scss';
+import "./styles/global.scss";
+import StudentEvaluation from "./pages/student/studentEvaluation.jsx";
 
 function App() {
   return (
@@ -51,6 +53,22 @@ function App() {
           element={
             <SecondLayout title="Gestión del quiz">
               <ApproveQuestions />
+            </SecondLayout>
+          }
+        />
+        <Route
+          path="/quizReview"
+          element={
+            <SecondLayout title="Confirmacion del cuestionario">
+              <QuizReview />
+            </SecondLayout>
+          }
+        />
+        <Route
+          path="/studentEvaluation"
+          element={
+            <SecondLayout title="Evaluación">
+              <StudentEvaluation />
             </SecondLayout>
           }
         />

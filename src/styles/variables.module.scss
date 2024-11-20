@@ -1,11 +1,7 @@
-
 :root {
-  --bg-primary-to-b: linear-gradient(180deg, #003046, #002335);
-  --bg-primary-to-t: linear-gradient(180deg, #002335, #003046);
-  --bg-primary: #004669;
-  --bg-primary-hover: #00689c;
-  --bg-secondary: #051725;
-  --bg-secondary-hover: #00233f;
+  --bg-primary-to-b: linear-gradient(to bottom, #0f172a, #0f172a, #12294d);
+  --bg-secondary: #121b31;
+  --bg-secondary-hover: #17233f;
   --bg-tertiary: #002335;
   --bg-tertiary-hover: #00293d;
   --btn-color: #fff;
@@ -13,9 +9,14 @@
   --black: #000000;
   --black-hover: #222222;
   --white: #ffffff;
-  --white-hover: #b3b3b3;
+  --white-hover: #d6d6d6;
   --gray: #dbdbdb;
   --gray-hover: #c7c7c7;
+
+  /* Opacitied colors */
+
+  --white-o: rgba(255, 255, 255, 0.2);
+  --black-o: rgba(0, 0, 0, 0.2);
 
   /* Gradients */
 
@@ -48,26 +49,30 @@
   --link-color: #008cff;
   --link-color-hover: #00689c;
 
+  --green-color: #00FF55;
+  --green-color-hover: #00cc33;
+
+  --normal-padding: 20px 250px;
+  --normal-padding-media: 20px;
   --padding-size: 25px;
-  --input-padding: 7px;
+  --input-padding: 5px;
   --border-size: 10px;
+
+  --normal-margin: 20px;
 
   /* Fonts */
 
-  --yaldevi-font: "Yaldevi", serif;
-  --poppins-font: "Poppins", sans-serif;
-  --roboto-font: "Roboto", sans-serif;
-  --rubik-font: "rubik", "Yaldevi", "sans-serif"
-  --quick-sand-font: "Quicksand", sans-serif;
-  --bebas-font: "Bebas Neue", sans-serif;
+  --font-heading: "Inter", sans-serif;
+  --font-body: "Roboto", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
 
   /* Other */
 
   --inclination: skewX(15deg);
+  --normal-radius: 5px;
 
   /* Opacities */
 
   --opacity-1: 40%;
   --opacity-2: 25%;
 }
-

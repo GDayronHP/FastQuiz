@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
