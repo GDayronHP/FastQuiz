@@ -24,11 +24,13 @@ const PrincPg = () => {
   const crearPrompt = async (prompt) => {
     if (prompt !== "") {
       try {
-        /* Manejar carga */
+        /* Manejar carga durante resolución de promesas de la api */
         setLoading(true);
         mainRef.current.style.filter = "blur(15px)";
         mainRef.current.style.pointerEvents = "none";
         mainRef.current.style.overflow = "hidden";
+
+
         const response = await TeacherService.createPrompt(prompt);
         console.log("Respuesta completa:", response);
         console.log("Respuesta recibida:", response.data);
@@ -38,6 +40,7 @@ const PrincPg = () => {
           error.response ? error.response.data : error.message
         );
       } finally {
+        /* Detener carga */
         setLoading(false);
         mainRef.current.style.filter = "blur(0px)";
         mainRef.current.style.pointerEvents = "auto";
