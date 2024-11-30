@@ -1,0 +1,138 @@
+/* Otros estilos que ya tienes */
+
+/* Animación de destello */
+@keyframes flash {
+  0% {
+    background-color: #f0f0f0;
+  }
+  50% {
+    background-color: #ffff99;
+  }
+  100% {
+    background-color: #f0f0f0;
+  }
+}
+
+.prompt.flash {
+  animation: flash 1s ease-in-out;
+}
+
+/* Estilos para el prompt seleccionado */
+.selectedPrompt {
+  background-color: #d4edda !important;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  
+}
+
+.selectedLabel {
+
+  top: 5px;
+  right: 10px;
+  background-color: #155724;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+/* Otros estilos */
+.createPrompt {
+  font-family: var(--font-body);
+  font-size: var(--normal-size);
+  padding: 10px 15px;
+
+  position: relative;
+}
+
+.promptText {
+  color: white;
+}
+
+.input {
+  text-align: center;
+  width: 120px;
+  margin: 5px 0px;
+  padding: var(--input-padding);
+  border-bottom: 1px solid var(--white-o);
+}
+
+.select {
+  text-align: center;
+  width: 120px;
+  margin: 5px 0px;
+  padding: var(--input-padding);
+  border-bottom: 1px solid var(--white-o);
+}
+
+.selectNumber {
+  text-align: center;
+  width: 120px;
+  margin-bottom: 10px;
+  padding: var(--input-padding);
+  border-bottom: 1px solid var(--white-o);
+}
+
+.input:focus,
+.select:focus,
+.selectNumber:focus {
+  border-bottom: 1px solid var(--white);
+}
+
+/* Lista de templates de prompt */
+
+.moreTemplatesBtn {
+  position: absolute;
+  top: 0;
+  right: -40px;
+  padding: var(--input-padding);
+  transition: all 0.1s ease-in;
+  background-color: var(--secondary-color);
+  outline: 2px solid var(--secondary-color-hover);
+}
+
+.moreTemplatesBtn:hover {
+  border-radius: 1px;
+  background-color: var(--secondary-color-hover);
+  outline-color: var(--secondary-color);
+}
+
+.promptTemplates {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  background-color: var(--secondary-color-hover);
+  color: white;
+  width: 400px;
+  padding: 20px;
+  border-left: 2px solid var(--secondary-color);
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.showPromptTemplates {
+  display: block;
+}
+
+.hidePromptTemplates {
+  display: none;
+}
+
+.prompt {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--black-o);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.closeTemplatesBtn{
+  color: white;
+}
+
+.prompt:hover {
+  background-color: var(--secondary-color);
+}

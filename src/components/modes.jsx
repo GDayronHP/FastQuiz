@@ -4,19 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "../styles/components/mode.module.scss";
 
 import upload from "../assets/icons/upload.svg";
+import PromptGenerator from "./promptGenerator";
 
-const Modes = ({ showAdvise, enabled, action, setAction, data }) => {
+const Modes = ({
+  showAdvise,
+  enabled,
+  action,
+  setAction,
+  data,
+  inputs,
+  setInputs,
+}) => {
   const [mode, setMode] = useState("file-mode");
   const [fileName, setFileName] = useState(null);
-
-  /* Definir una acción al enviar cierto dato del */
-
-  function definirAction(event) {
-    const promptValue = event.target.value;
-    if (action !== undefined) {
-      setAction(promptValue);
-    }
-  }
 
   /* Cambiar de modo */
   function changeMode(newMode) {
@@ -137,16 +137,14 @@ const Modes = ({ showAdvise, enabled, action, setAction, data }) => {
           )}
 
           {mode === "prompt-mode" && (
-            <motion.textarea
+            <motion.div
               className={styles["prompt-container"]}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              placeholder="Escribe un prompt..."
-              onChange={(event) => definirAction(event)}
-              required={true}
-            />
+            >
+              <PromptGenerator inputs={inputs} setInputs={setInputs} />
+            </motion.div>
           )}
         </AnimatePresence>
       )}

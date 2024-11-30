@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "../styles/components/question.module.scss";
 
-const Question = ({ question, alternatives }) => {
+const Question = ({ key, question, alternatives }) => {
   const abcd = ["A", "B", "C", "D"];
   const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -14,6 +14,7 @@ const Question = ({ question, alternatives }) => {
     <React.Fragment>
       <div className={styles["question-container"]}>
         <motion.div
+          key={key}
           className={styles.question}
           initial={{ opacity: 0, y: 20 }}
           animate={{

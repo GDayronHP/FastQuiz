@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import TeacherService from "../services/teacherService.js";
-
+import { useNavigate } from "react-router-dom";
 /* Components */
 import Modes from "../components/modes";
 import FileAlert from "../components/fileAlert";
@@ -15,21 +15,41 @@ import { motion } from "framer-motion";
 import styles from "../styles/principalPage.module.scss";
 
 const PrincPg = () => {
+
+  const navigate = useNavigate();
+  
   const mainRef = useRef(null);
   const [advise, setAdvise] = useState(false);
-  const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
+  const [inputs, setInputs] = useState({
+    cantidadPreguntas: "",
+    dificultad: "",
+    tema: "",
+    alternativas: "",
+  });
 
-  /* Función para crear prompt utilizando la API de FastQuiz */
-  const crearPrompt = async (prompt) => {
+  const handleSubmit = () => {
+    const { cantidadPreguntas, dificultad, tema, alternativas } = inputs;
+
+    if (!cantidadPreguntas || !dificultad || !tema || !alternativas) {
+      alert("Por favor, complete todos los campos.");
+      return;
+    }
+
+    const promptValue = `Por favor, deme ${cantidadPreguntas} preguntas ${dificultad} sobre ${tema} con ${alternativas} alternativas de cada pregunta y su respuesta correcta intercalada.`;
+
+    setTimeout(() => enviarPrompt(promptValue), 100);
+  };
+
+  const enviarPrompt = async (prompt) => {
     if (prompt !== "") {
       try {
-        /* Manejar carga durante resolución de promesas de la api */
         setLoading(true);
-        mainRef.current.style.filter = "blur(15px)";
-        mainRef.current.style.pointerEvents = "none";
-        mainRef.current.style.overflow = "hidden";
-
+        if (mainRef.current) {
+          mainRef.current.style.filter = "blur(15px)";
+          mainRef.current.style.pointerEvents = "none";
+          mainRef.current.style.overflow = "hidden";
+        }
 
         const response = await TeacherService.createPrompt(prompt);
         console.log("Respuesta completa:", response);
@@ -40,34 +60,39 @@ const PrincPg = () => {
           error.response ? error.response.data : error.message
         );
       } finally {
-        /* Detener carga */
         setLoading(false);
-        mainRef.current.style.filter = "blur(0px)";
-        mainRef.current.style.pointerEvents = "auto";
-        mainRef.current.style.overflow = "auto";
+        if (mainRef.current) {
+          mainRef.current.style.filter = "blur(0px)";
+          mainRef.current.style.pointerEvents = "auto";
+          mainRef.current.style.overflow = "auto";
+        }
+        navigate('/quizDetails/hola');
       }
     } else {
-      alert("El prompt esta vacio, ingrese información por favor");
+      alert("El prompt está vacío, ingrese información por favor");
     }
   };
 
-  /* Mostrar/ocultar aviso para subida de archivos */
   const showAdvise = () => {
     setAdvise(true);
-    mainRef.current.style.filter = "blur(15px)";
-    mainRef.current.style.pointerEvents = "none";
-    mainRef.current.style.overflow = "hidden";
+    if (mainRef.current) {
+      mainRef.current.style.filter = "blur(15px)";
+      mainRef.current.style.pointerEvents = "none";
+      mainRef.current.style.overflow = "hidden";
+    }
   };
 
   const hideAdvise = () => {
     setAdvise(false);
-    mainRef.current.style.filter = "blur(0px)";
-    mainRef.current.style.pointerEvents = "auto";
-    mainRef.current.style.overflow = "auto";
+    if (mainRef.current) {
+      mainRef.current.style.filter = "blur(0px)";
+      mainRef.current.style.pointerEvents = "auto";
+      mainRef.current.style.overflow = "auto";
+    }
   };
 
   return (
-    <div className={`${styles.princPg} ${advise ? styles["blurred"] : ""}`}>
+    <div className={`${styles.princPg} ${advise ? styles.blurred : ""}`}>
       <main className={styles["main-page"]} ref={mainRef}>
         <motion.h1 className={styles.title} {...normalAnimation(0.1)}>
           Aprende o enseña, no importa, lo importante es{" "}
@@ -85,18 +110,21 @@ const PrincPg = () => {
           <Modes
             showAdvise={showAdvise}
             enabled={true}
-            action={prompt}
-            setAction={setPrompt}
+            action={null}
+            setAction={() => {}}
+            data={null}
+            inputs={inputs}
+            setInputs={setInputs}
           />
 
           <BackTo
             backTo={"/"}
-            nextTo={prompt ? "/quizDetails/hola" : "#"}
-            action={() => crearPrompt(prompt)}
+            nextTo={null}
+            action={() => handleSubmit()}
           />
         </motion.section>
       </main>
-      {loading ? <Loader /> : ""}
+      {loading && <Loader />}
 
       {advise && <FileAlert hideAdvise={hideAdvise} />}
     </div>

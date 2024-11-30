@@ -2,7 +2,7 @@
   --bg-primary-to-b: linear-gradient(to bottom, #0f172a, #0f172a, #12294d);
   --bg-secondary: #121b31;
   --bg-secondary-hover: #17233f;
-  --bg-tertiary: #002335;
+  --bg-tertiary: hsl(200, 100%, 10%);
   --bg-tertiary-hover: #00293d;
   --btn-color: #fff;
   --btn-hover: #dddddd;
@@ -10,7 +10,7 @@
   --black-hover: #222222;
   --white: #ffffff;
   --white-hover: #d6d6d6;
-  --gray: #dbdbdb;
+  --gray: rgba(255, 255, 255, 0.8);
   --gray-hover: #c7c7c7;
 
   /* Opacitied colors */
@@ -22,8 +22,10 @@
 
   --g-white-purple: linear-gradient(90deg, #fff, #5e00ff);
 
+  --primary-color: #12294d;
+  --secondary-color: #0f172a;
   --secondary-color: #5e00ff;
-  --secondary-color-hover: #3c00a5;
+  --secondary-color-hover: #4900c7;
 
   --correct-answer: linear-gradient(90deg, #008bd0, #00cfde);
   --correct-answer-shadow: #00e2f242;
@@ -38,8 +40,8 @@
   /* Font sizes */
 
   --big-title-size: 70px;
-  --normal-size: 15px;
   --title-size: 35px;
+  --normal-size: 15px;
   --important-size: 30px;
 
   --button-size: 25px;
@@ -51,10 +53,10 @@
 
   --green-color: #00FF55;
   --green-color-hover: #00cc33;
+  
+  --normal-padding: 20px 500px;
+  --normal-padding-media: 30px 20px;
 
-  --normal-padding: 20px 250px;
-  --normal-padding-media: 20px;
-  --padding-size: 25px;
   --input-padding: 5px;
   --border-size: 10px;
 
@@ -65,6 +67,8 @@
   --font-heading: "Inter", sans-serif;
   --font-body: "Roboto", sans-serif;
   --font-secondary: "Poppins", sans-serif;
+
+  /* Other combinations: Montserrat and Roboto */
 
   /* Other */
 

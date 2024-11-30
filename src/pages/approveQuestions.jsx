@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Question from "../components/question.jsx";
 import { Link } from "react-router-dom";
 
+import data from "../components/testData/data";
+
 import styles from "../styles/approveQuestions.module.scss";
 
 import backRow from "../assets/icons/nextRow.svg";
@@ -16,9 +18,54 @@ import plus from "../assets/icons/plus.svg";
 import bigNext from "../assets/icons/bigNext.svg";
 
 const ApproveQuestions = () => {
+  /* No se usaron estados para otros componentes debido a que no lo vi necesario */
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1000);
   const isSideBarResponsive = window.innerWidth < 700;
   const toggleBtn = useRef(null);
+
+  const [approvedList, setApprovedList] = useState([]);
+  const [indexData, setIndexData] = useState(1);
+  const [preparedData, setPreparedData] = useState(() => {
+    // Encontramos el objeto de datos correspondiente a 'indexData'
+    const foundObject = data.find((item) => item.key === indexData);
+    return foundObject
+      ? {
+          ...foundObject,
+          alternatives: foundObject.alternatives.map(
+            (alternative) => alternative.alternative
+          ),
+        }
+      : null;
+  });
+
+  const anotherData = () => {
+    setIndexData((prevIndexData) => {
+      const newIndex = prevIndexData + 1;
+      return newIndex;
+    });
+
+    setApprovedList((prevApprovedList) => [
+      ...prevApprovedList,
+      preparedData.question,
+    ]);
+  };
+
+  // Usamos un `useEffect` para escuchar cambios en `indexData` y actualizar `preparedData`
+  useEffect(() => {
+    const foundObject = data.find((item) => item.key === indexData);
+
+    if (foundObject) {
+      setPreparedData({
+        ...foundObject,
+        alternatives: foundObject.alternatives.map(
+          (alternative) => alternative.alternative
+        ),
+      });
+    } else {
+      setPreparedData(null);
+    }
+  }, [indexData]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -95,12 +142,13 @@ const ApproveQuestions = () => {
                   <p>Preguntas aprobadas: 2</p>
                 </div>
                 <div className={styles["approved"]}>
-                  <div>
-                    <p>¿Por qué es importante SCRUM?</p>
-                  </div>
-                  <div>
-                    <p>¿Cuántas fases de SCRUM existen?</p>
-                  </div>
+                  {approvedList.map((approved) => {
+                    return (
+                      <div>
+                        <p>{approved}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div
@@ -154,15 +202,21 @@ const ApproveQuestions = () => {
             </motion.h1>
           </div>
         </header>
-        <Question
-          question="¿Cuál es la primera fase de SCRUM?"
-          alternatives={[
-            "Inicio",
-            "Planificación y estimación",
-            "Implementación",
-            "Lanzamiento",
-          ]}
-        />
+
+        {/* Componente para renderizar las preguntas con sus alterntivas de acuerdo al indice */}
+
+        {preparedData ? (
+          <Question
+            key={preparedData.key}
+            question={preparedData.question}
+            alternatives={preparedData.alternatives}
+          />
+        ) : (
+          <p>Ya no hay más preguntas :(</p>
+        )}
+
+        {/* ------------------------------------------------------------------------- */}
+
         <motion.div
           className={styles["question-actions"]}
           initial={{ opacity: 0, y: 100 }}
@@ -181,7 +235,7 @@ const ApproveQuestions = () => {
               stiffness: 150,
             }}
           >
-            <a href="">Rechazar</a>
+            <button href="">Rechazar</button>
             <img src={loading} alt="loading" />
           </motion.button>
           <motion.button
@@ -195,7 +249,9 @@ const ApproveQuestions = () => {
               stiffness: 150,
             }}
           >
-            <Link to="/quizReview">Aceptar</Link>
+            <button className={styles.accept} onClick={anotherData}>
+              Aceptar
+            </button>
             <img src={plus} alt="plus" />
           </motion.button>
           <img className={styles.bigNext} src={bigNext} alt="" />

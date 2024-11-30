@@ -17,7 +17,7 @@
   /* Main page */
   .slide-modes {
     display: flex;
-    width: 100%;
+    margin: auto;
     flex-direction: column;
     align-items: center;
   }
@@ -38,8 +38,8 @@
 
   .phrase {
     font-family: var(--font-secondary);
-    font-size: clamp(1rem, 2vw, 1.6rem);
-    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    color: var(--gray);
     padding: 0 10vw;
     text-align: center;
     font-weight: normal;
@@ -56,7 +56,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--white);
-    padding: var(--padding-size);
+    padding: 20px;
     border: 2px solid var(--g-white-purple);
     border-radius: var(--border-size);
     text-align: center;

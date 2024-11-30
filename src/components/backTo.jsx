@@ -6,7 +6,6 @@ import styles from "../styles/components/backTo.module.scss";
 
 const BackTo = ({ backTo, nextTo, action }) => {
   const navigate = useNavigate();
-
   const handleClick = async () => {
     try {
       if (action) {

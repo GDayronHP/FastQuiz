@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 /* Components */
@@ -31,10 +31,14 @@ const QuizDetails = () => {
         >
           <h1>Describe las características de tu formulario</h1>
         </motion.div>
+        <p className={styles.description}>
+          Personaliza tu formulario con un tema y descripción únicos
+        </p>
 
         <section className={styles["question-forms"]}>
+          {/* Campo para el tema */}
           <motion.div
-            className={styles["questions-qty"]}
+            className={styles["form-topic"]}
             initial={{
               opacity: 0,
               transform: "translateY(15px)",
@@ -46,20 +50,18 @@ const QuizDetails = () => {
               delay: 0.2,
             }}
           >
-            <label htmlFor="cantidad">Cantidad de preguntas</label>
+            <label htmlFor="tema">Tema del formulario</label>
             <motion.input
-              type="number"
-              id="cantidad"
-              min="1"
-              max="10"
-              placeholder="Cantidad máxima: 10"
-              whileFocus={{ scale: 1.05 }}
+              type="text"
+              id="tema"
+              placeholder="Ingresa el tema"
               transition={{ duration: 0.2 }}
             />
           </motion.div>
 
+          {/* Campo para la descripción */}
           <motion.div
-            className={styles["questions-type"]}
+            className={styles["form-description"]}
             initial={{
               opacity: 0,
               transform: "translateY(15px)",
@@ -71,50 +73,19 @@ const QuizDetails = () => {
               delay: 0.3,
             }}
           >
-            <label htmlFor="tipo">Tipo de preguntas</label>
-            <motion.select
-              id="tipo"
-              whileFocus={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              <option value="default">Por defecto</option>
-              <option value="simple">Simple</option>
-              <option value="multiple">Multiple</option>
-              <option value="verdadero_falso">Verdadero/Falso</option>
-              <option value="abierto">Abierta</option>
-            </motion.select>
-          </motion.div>
-
-          <motion.div
-            className={styles["form-difficulty"]}
-            initial={{
-              opacity: 0,
-              transform: "translateY(15px)",
-            }}
-            animate={{ opacity: 1, transform: "translateY(0px)" }}
-            transition={{
-              duration: 0.8,
-              type: "spring",
-              delay: 0.4,
-            }}
-          >
-            <label htmlFor="difficulty">Dificultad del cuestionario</label>
-            <motion.select
-              type="text"
-              id="difficulty"
-              whileFocus={{ scale: 1.05 }}
+            <label htmlFor="descripcion">Descripción</label>
+            <motion.textarea
+              id="descripcion"
+              placeholder="Escribe una breve descripción"
+              rows="4"
               transition={{ duration: 0.2 }}
-            >
-              <option value="default">Fácil</option>
-              <option value="simple">Intermedio</option>
-              <option value="multiple">Difícil</option>
-            </motion.select>
+            />
           </motion.div>
         </section>
       </div>
 
       {/* Modos deshabilitados */}
-      <motion.div
+      {/* <motion.div
         className={styles.slideContainer}
         initial={{
           opacity: 0,
@@ -128,7 +99,7 @@ const QuizDetails = () => {
         }}
       >
         <Modes enabled={false} data={{ type: "file", value: "Ejemplo123" }} />
-      </motion.div>
+      </motion.div> */}
 
       {/* Animación de entrada de las imágenes de QuizStyle */}
       <motion.div
@@ -168,7 +139,7 @@ const QuizDetails = () => {
           delay: 0.7,
         }}
       >
-        <BackTo backTo={"/quizDetails/hola"} nextTo={"/quizManagement"}  />
+        <BackTo backTo={"/principalPage"} nextTo={"/quizManagement"} />
       </motion.div>
     </div>
   );

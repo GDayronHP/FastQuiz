@@ -44,6 +44,8 @@
   cursor: pointer;
 }
 
+/* File mode */
+
 .file-container {
   padding: 10px;
   display: flex;
@@ -87,20 +89,25 @@
 
 }
 
+/* Prompt container */
+
 .prompt-container {
-  font-family: var(---font-secondary);
-  font-size: 15px;
-  padding: 10px;
-  text-wrap: wrap;
-  color: var(--white);
-  background-color: rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.05);
   border-radius: var(--normal-radius);
-  min-width: 350px;
+  border-top-left-radius: var(--normal-radius);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: var(--normal-radius);
+  border-bottom-left-radius: var(--normal-radius);
+  min-width: 300px;
   min-height: 300px;
-  max-height: 350px;
   max-width: 600px;
+  max-height: 350px;
   width: calc(100% - 450px);
   height: calc(100vh - 500px);
   border: 2px solid var(--white-o);
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 1);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 15px rgba(255, 255, 255, 0.15);
 }
