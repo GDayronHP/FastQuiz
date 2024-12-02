@@ -1,4 +1,30 @@
 .quiz-config {
+
+  input {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--white);
+    border-radius: 50%; 
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+  }
+  
+  input:checked::after {
+
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--white);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+
   .quiz-data-container {
     font-family: var(--font-heading);
     display: flex;

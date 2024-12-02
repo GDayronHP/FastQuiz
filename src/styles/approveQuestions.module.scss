@@ -231,6 +231,16 @@
     background-color: black;
   }
 
+  .question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 75%;
+    padding: 5px;
+  }
+
   .question-actions button {
     margin-bottom: 20px;
     background: none;

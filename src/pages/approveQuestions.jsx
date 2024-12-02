@@ -156,7 +156,9 @@ const ApproveQuestions = () => {
                 ref={questionsContainer}
               ></div>
               <button className={styles["finishQuiz"]}>
-                <a href="#">Finalizar Cuestionario</a>
+                <Link to="/quizReview" href="#">
+                  Finalizar Cuestionario
+                </Link>
               </button>
             </div>
             <button className={styles["refuseQuiz"]}>
@@ -206,11 +208,13 @@ const ApproveQuestions = () => {
         {/* Componente para renderizar las preguntas con sus alterntivas de acuerdo al indice */}
 
         {preparedData ? (
-          <Question
-            key={preparedData.key}
-            question={preparedData.question}
-            alternatives={preparedData.alternatives}
-          />
+          <div className={styles["question-container"]}>
+            <Question
+              key={preparedData.key}
+              question={preparedData.question}
+              alternatives={preparedData.alternatives}
+            />
+          </div>
         ) : (
           <p>Ya no hay más preguntas :(</p>
         )}

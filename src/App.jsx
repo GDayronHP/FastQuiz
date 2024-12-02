@@ -11,6 +11,7 @@ import QuizReview from "./pages/quizReview";
 
 import "./styles/global.scss";
 import StudentEvaluation from "./pages/student/studentEvaluation.jsx";
+import Results from "./pages/student/results.jsx";
 
 function App() {
   return (
@@ -72,6 +73,15 @@ function App() {
             </SecondLayout>
           }
         />
+                <Route
+          path="/studentResults"
+          element={
+            <SecondLayout title="Evaluación">
+              <Results />
+            </SecondLayout>
+          }
+        />
+
       </Routes>
     </Router>
   );

@@ -1,21 +1,12 @@
-.question-container {
-  padding: 5px;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.question-container .question {
+.question {
   height: 25%;
-  padding: 20px 0px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
-  font-size: clamp(20px, 4.5vw, 43px);
+  font-size: clamp(16px, 4.3vw, 2rem);
   font-family: var(--font-heading);
   text-align: center;
 }
-
 
 .alternatives-container {
   padding: 20px 0;
@@ -32,7 +23,7 @@
   margin-bottom: 20px;
   background-color: var(--normal-answer);
   width: 100%;
-  padding: clamp(20px, 1.4vw, 30px);
+  padding: clamp(12px, 2.5vw, 30px);
   box-shadow: 0px 5px 0px var(--normal-answer-shadow);
   height: fit-content;
   border-radius: var(--normal-radius);
@@ -57,4 +48,31 @@
 
 .alternative label:hover {
   cursor: pointer;
+}
+
+/* Cambios para cada alternativa de acuerdo a la veracidad de la respuesta */
+
+.alternative.correct {
+  border: 5px solid var(--success-color);
+}
+
+.alternative.correct::before {
+  content: "Respuesta correcta";
+  position: absolute;
+  height: 20px;
+  top: -30px;
+  left: 0px;
+  padding: var(--input-padding) 10px;
+  background-color: var(--success-color);
+  border-radius: var(--normal-radius);
+  color: black;
+}
+
+.alternative.incorrect {
+  background-color: var(--error-color);
+  border: 5px solid var(--error-color);
+}
+
+.alternative.other {
+  background-color: var(--primary-color);
 }

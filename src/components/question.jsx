@@ -12,7 +12,7 @@ const Question = ({ key, question, alternatives }) => {
 
   return (
     <React.Fragment>
-      <div className={styles["question-container"]}>
+      <>
         <motion.div
           key={key}
           className={styles.question}
@@ -28,7 +28,7 @@ const Question = ({ key, question, alternatives }) => {
           {alternatives.map((alternative, index) => (
             <motion.div
               key={index}
-              className={styles.alternative}
+              className={`${styles.alternative}`}
               onClick={() => handleContainerClick(index)}
               initial={{ opacity: 0, y: 20 }}
               animate={{
@@ -48,7 +48,7 @@ const Question = ({ key, question, alternatives }) => {
                 duration: 0.2,
                 ease: "easeIn",
               }}
-              whileHover={{ filter: "brightness(95%)" }}
+              whileHover={{ filter: "brightness(90%)" }}
               style={{ position: "relative", cursor: "pointer" }}
             >
               <input
@@ -64,7 +64,7 @@ const Question = ({ key, question, alternatives }) => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </>
     </React.Fragment>
   );
 };

@@ -1,9 +1,126 @@
 .studentEvaluation {
-    padding: var(--normal-padding);
+  padding: var(--normal-padding);
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+
+  a {
+    all: unset;
+  }
+
+  .progressContainer {
+    padding: 0 10px;
+    font-family: var(--font-secondary);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5%;
+    
+    progress {
+      border-radius: 7px;
+      flex: 1;
+      height: 22px;
+      margin: 0 10px;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+
+      //Cuando se de una respuesta correcta
+      // box-shadow: 0px 0px 40px var(--success-color);
+
+      transition: box-shadow 0.5s ease;
+    }
+    progress::-webkit-progress-bar {
+      background-color: var(--white-o);
+      border-radius: var(--normal-radius);
+      transition: width 0.5s ease;
+    }
+    progress::-webkit-progress-value {
+      background-color: var(--tertiary-color);
+
+      //Cuando se de una respuesta correcta
+      // background-color: var(--success-color);
+
+      border-radius: var(--normal-radius);
+      transition: width 0.5s ease;
+    }
+
+  }
+  .progressValue {
+    letter-spacing: 2px;
+  }
+
+  .question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 95%;
+  }
+
+  .continueContainer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    height: 12vh;
+    transition: background-color .1s ease-in;
+    cursor: pointer;
+  }
+  .continueBtn {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 4vw, 32px);
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-right: 5px;
+    }
+    img {
+      height: clamp(1rem, 6.1vw, 43px);
+    }
+  }
+
+  .continueContainer:hover {
+    background-color: var(--white-hover);
+  }
+
+  .continueContainer:active {
+    background-color: var(--white-o);
+  }
+
+  /* Cambios del boton de continuar cuando de acuerdo a la veracidad de la respuesta del usuario */
+  .continueContainer.correct {
+    background-color: var(--success-color);
+    box-shadow: inset 0px 0px 20px rgba($color: #000000, $alpha: 0.5);
+  }
+
+  .continueContainer.correct:hover {
+    background-color: var(--success-color-hover);
+    box-shadow: inset 0px 0px 20px rgba($color: #000000, $alpha: 0.7);
+  }
+
+  .continueContainer.incorrect {
+    -webkit-text-fill-color: white;
+    background-color: var(--error-color);
+    box-shadow: inset 0px 0px 20px rgba($color: #000000, $alpha: 0.5);
+    .continueBtn img {
+      fill: white;
+    }
+  }
+
+  .continueContainer.incorrect:hover {
+    background-color: var(--error-color-hover);
+    box-shadow: inset 0px 0px 20px rgba($color: #000000, $alpha: 0.7);
+  }
 }
 
 @media (max-width: 1540px) {
-    .studentEvaluation {
-        padding: var(--normal-padding-media);
-    }
+  .studentEvaluation {
+    padding: var(--normal-padding-media);
+  }
 }

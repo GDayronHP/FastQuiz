@@ -7,7 +7,7 @@
   --btn-color: #fff;
   --btn-hover: #dddddd;
   --black: #000000;
-  --black-hover: #222222;
+  --black-hover: #131313;
   --white: #ffffff;
   --white-hover: #d6d6d6;
   --gray: rgba(255, 255, 255, 0.8);
@@ -23,9 +23,11 @@
   --g-white-purple: linear-gradient(90deg, #fff, #5e00ff);
 
   --primary-color: #12294d;
-  --secondary-color: #0f172a;
+  --primary-color-hover: #0f172a;
   --secondary-color: #5e00ff;
   --secondary-color-hover: #4900c7;
+  --tertiary-color: #008bd0;
+  --tertiary-color-hover: #0072a5;
 
   --correct-answer: linear-gradient(90deg, #008bd0, #00cfde);
   --correct-answer-shadow: #00e2f242;
@@ -37,12 +39,22 @@
   --refuse-question: #e0e0e0;
   --refuse-question-hover: #cfcfcf;
 
+  --success-color: #00FFB7;
+  --succes-color-hover: #00cc33;
+
+  --error-color: #FF3333;
+  --error-color-hover: #cc0000;
+
+  --yellow-color: #FFE100;
+  --yellow-color-hover: #ffcc00;
+
+
   /* Font sizes */
 
-  --big-title-size: 70px;
-  --title-size: 35px;
-  --normal-size: 15px;
-  --important-size: 30px;
+  --big-title-size: clamp(2.5rem, 5vw, 4.375rem); 
+  --title-size: clamp(1.5rem, 3vw, 2.1875rem);    
+  --normal-size: clamp(0.9375rem, 1.5vw, 0.9375rem); 
+  --important-size: clamp(1.25rem, 3vw, 1.875rem); 
 
   --button-size: 25px;
 
@@ -67,6 +79,8 @@
   --font-heading: "Inter", sans-serif;
   --font-body: "Roboto", sans-serif;
   --font-secondary: "Poppins", sans-serif;
+  --font-funny: "Silkscreen", sans-serif;
+  --font-tertiary: "Protest Strike", sans-serif;
 
   /* Other combinations: Montserrat and Roboto */
 

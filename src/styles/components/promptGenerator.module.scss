@@ -19,17 +19,16 @@
 
 /* Estilos para el prompt seleccionado */
 .selectedPrompt {
-  background-color: #d4edda !important;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-  
+  background-color: #23005f !important;
+  border: 1px solid white;
+  position: relative;
 }
 
 .selectedLabel {
-
-  top: 5px;
-  right: 10px;
-  background-color: #155724;
+  top: -10px;
+  right: 0;
+  position: absolute;
+  background-color: #23005f;
   color: #fff;
   padding: 2px 8px;
   border-radius: 3px;
@@ -41,7 +40,6 @@
   font-family: var(--font-body);
   font-size: var(--normal-size);
   padding: 10px 15px;
-
   position: relative;
 }
 
@@ -104,7 +102,7 @@
   height: 100%;
   background-color: var(--secondary-color-hover);
   color: white;
-  width: 400px;
+
   padding: 20px;
   border-left: 2px solid var(--secondary-color);
   box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
@@ -130,7 +128,15 @@
 }
 
 .closeTemplatesBtn{
+  position: absolute;
+  top: -10px;
+  right: -10px;
   color: white;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.closeTemplatesBtn:hover{
+  background-color: var(--white-o);
 }
 
 .prompt:hover {

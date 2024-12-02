@@ -3,6 +3,8 @@ import NewModes from "../components/newModes";
 import QuizConfig from "../components/quizConfig";
 import GeneralConfig from "../components/generalConfig";
 import BackTo from "../components/backTo";
+import { motion } from 'framer-motion';
+import normalAnimation from "../components/animation/normalAnimation";
 
 import save from "../assets/icons/save.svg";
 
@@ -27,13 +29,13 @@ const QuizReview = () => {
           CONFIGURATION: <GeneralConfig />,
         }}
       />
-      <div className={styles.saveContainer}>
+      <motion.div {...normalAnimation(0.3)} className={styles.saveContainer}>
         <p ref={autosavedRef}> Autoguardado a las {formattedDate} </p>
-        <Link className={styles.saveBtn}>
+        <Link  className={styles.saveBtn} to="/studentEvaluation">
           <p>Guardar</p>
           <img src={save} />
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 };
