@@ -19,10 +19,6 @@ const PromptGenerator = ({ inputs, setInputs }) => {
     setPromptTemplates(!promptTemplates);
   };
 
-  const handleCloseTemplates = () => {
-    setPromptTemplates(false);
-  };
-
   const handleSelectPrompt = (prompt) => {
     if (prompt === selectedPrompt) {
       alert("Por favor, seleccione otro prompt.");
@@ -136,7 +132,35 @@ const PromptGenerator = ({ inputs, setInputs }) => {
           title="Más plantillas"
           onClick={handleToggleTemplates}
         >
-          <img src={listPlus} alt="Más plantillas" />
+          {promptTemplates ? (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 45 45"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              
+            >
+              <rect
+                width="24"
+                height="24"
+                rx="22.5"
+                fill="url(#paint0_linear_332_248)"
+              />
+              <path
+                d="M12 35.625L9.375 33L19.875 22.5L9.375 12L12 9.375L22.5 19.875L33 9.375L35.625 12L25.125 22.5L35.625 33L33 35.625L22.5 25.125L12 35.625Z"
+                fill="white"
+              />
+              <defs></defs>
+            </svg>
+          ) : (
+            <img src={listPlus} alt="Más plantillas" />
+          )}
         </button>
       </div>
       <aside
@@ -160,33 +184,6 @@ const PromptGenerator = ({ inputs, setInputs }) => {
             )}
           </div>
         ))}
-        <button
-          className={styles.closeTemplatesBtn}
-          onClick={handleCloseTemplates}
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 45 45"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            styles="display:flex;
-              justify-content:center;
-              align-items:center;"
-          >
-            <rect
-              width="45"
-              height="45"
-              rx="22.5"
-              fill="url(#paint0_linear_332_248)"
-            />
-            <path
-              d="M12 35.625L9.375 33L19.875 22.5L9.375 12L12 9.375L22.5 19.875L33 9.375L35.625 12L25.125 22.5L35.625 33L33 35.625L22.5 25.125L12 35.625Z"
-              fill="white"
-            />
-            <defs></defs>
-          </svg>
-        </button>
       </aside>
     </>
   );

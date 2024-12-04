@@ -96,13 +96,15 @@
 }
 
 .promptTemplates {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  height: 100%;
+  position: absolute;
   background-color: var(--secondary-color-hover);
   color: white;
-
+  width: calc(100% - 450px);
+  height: calc(100vh - 500px);
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 600px;
+  max-height: 350px;
   padding: 20px;
   border-left: 2px solid var(--secondary-color);
   box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
@@ -127,17 +129,17 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-.closeTemplatesBtn{
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  color: white;
-  transition: background-color 0.2s ease-in-out;
-}
+// .closeTemplatesBtn{
+//   position: absolute;
+//   top: 0px;
+//   right: 0px;
+//   color: white;
+//   transition: background-color 0.2s ease-in-out;
+// }
 
-.closeTemplatesBtn:hover{
-  background-color: var(--white-o);
-}
+// .closeTemplatesBtn:hover{
+//   background-color: var(--white-o);
+// }
 
 .prompt:hover {
   background-color: var(--secondary-color);

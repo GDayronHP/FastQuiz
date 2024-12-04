@@ -1,17 +1,19 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
 import styles from "../styles/login.module.scss";
 
+const Login = ({ src, alt, text, to }) => {
+  return (
+    <React.Fragment>
+      <Link to={to}>
+        <div className={styles["auth-container"]}>
+          <img src={src} alt={alt} />
+          <p>{text}</p>
+        </div>
+      </Link>
+    </React.Fragment>
+  );
+};
 
-const Login = ({src, alt, text}) => {
-    return (
-        <React.Fragment>
-            <div className={styles ['auth-container']}>
-                <img src={src} alt={alt} />
-                <p>{text}</p>
-            </div>
-        </React.Fragment>
-    )
-}
-
-export default Login
+export default Login;

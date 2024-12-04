@@ -4,6 +4,7 @@
   padding: var(--normal-padding);
   font-family: var(--roboto-font);
   font-weight: 400;
+  
 
   main {
     transition: filter 0.1s ease-in-out;
@@ -27,6 +28,7 @@
     margin: auto;
     flex-direction: column;
     align-items: center;
+    position: static;
   }
 
   .title {

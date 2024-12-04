@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate  } from "react-router-dom";
 import Login from "../components/loginForm";
+import { useMyContext } from "../components/store/ContextApi";
 
 import styles from "../styles/login.module.scss";
 
@@ -13,7 +14,17 @@ import googleIcon from "../assets/icons/Login-Register-Form/google.svg";
 import emailIcon from "../assets/icons/Login-Register-Form/email.svg";
 import facebookIcon from "../assets/icons/Login-Register-Form/facebook.svg";
 
+const apiUrl = import.meta.env.VITE_API_URL;
 const Index = () => {
+
+  const { token } = useMyContext();
+  const navigate = useNavigate();
+
+    // Si el usuario ya tiene un token, lo redirigimos al home
+  useEffect(() => {
+    if (token) navigate("/"); // Redirige a la página principal si ya hay un token
+  }, [navigate, token]);
+
   const [hide, setHide] = useState(false);
 
   const handleClick = () => {
@@ -42,12 +53,14 @@ const Index = () => {
             src={googleIcon}
             alt={"google"}
             text={"Continuar con Google"}
+            to={`${apiUrl}/oauth2/authorization/google`}
           />
           <Login src={emailIcon} alt={"email"} text={"Continuar con Email"} />
           <Login
             src={facebookIcon}
             alt={"facebook"}
             text={"Continuar con Facebook"}
+            to={""}
           />
           <p>¿No posees una cuenta?</p>
           <div className={styles.toRegister} onClick={handleClick}>
@@ -74,12 +87,14 @@ const Index = () => {
             src={googleIcon}
             alt={"google"}
             text={"Continuar con Google"}
+            to={`${apiUrl}/oauth2/authorization/google`}
           />
           <Login src={emailIcon} alt={"email"} text={"Continuar con Email"} />
           <Login
             src={facebookIcon}
             alt={"facebook"}
             text={"Continuar con Facebook"}
+            to={""}
           />
           <p>¿Ya posees una cuenta?</p>
           <div className={styles.toLogin} onClick={handleClick}>
