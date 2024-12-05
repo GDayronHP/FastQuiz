@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TeacherService from "../services/teacherService.js";
+import { useMyContext } from "../components/store/ContextApi";
 import { useNavigate } from "react-router-dom";
 /* Components */
 import Modes from "../components/modes";
@@ -15,9 +16,10 @@ import { motion } from "framer-motion";
 import styles from "../styles/principalPage.module.scss";
 
 const PrincPg = () => {
+  const { token } = useMyContext();
 
   const navigate = useNavigate();
-  
+
   const mainRef = useRef(null);
   const [advise, setAdvise] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -51,7 +53,7 @@ const PrincPg = () => {
           mainRef.current.style.overflow = "hidden";
         }
 
-        const response = await TeacherService.createPrompt(prompt);
+        const response = await TeacherService.createPrompt(prompt, token);
         console.log("Respuesta completa:", response);
         console.log("Respuesta recibida:", response.data);
       } catch (error) {
@@ -66,7 +68,7 @@ const PrincPg = () => {
           mainRef.current.style.pointerEvents = "auto";
           mainRef.current.style.overflow = "auto";
         }
-        navigate('/quizDetails/hola');
+        navigate("/quizDetails/hola");
       }
     } else {
       alert("El prompt está vacío, ingrese información por favor");
@@ -117,11 +119,7 @@ const PrincPg = () => {
             setInputs={setInputs}
           />
 
-          <BackTo
-            backTo={"/"}
-            nextTo={null}
-            action={() => handleSubmit()}
-          />
+          <BackTo backTo={"/"} nextTo={null} action={() => handleSubmit()} />
         </motion.section>
       </main>
       {loading && <Loader />}

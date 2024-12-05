@@ -39,22 +39,21 @@
   --refuse-question: #e0e0e0;
   --refuse-question-hover: #cfcfcf;
 
-  --success-color: #00FFB7;
+  --success-color: #00ffb7;
   --succes-color-hover: #00cc33;
 
-  --error-color: #FF3333;
+  --error-color: #ff3333;
   --error-color-hover: #cc0000;
 
-  --yellow-color: #FFE100;
+  --yellow-color: #ffe100;
   --yellow-color-hover: #ffcc00;
-
 
   /* Font sizes */
 
-  --big-title-size: clamp(2.5rem, 5vw, 4.375rem); 
-  --title-size: clamp(1.5rem, 3vw, 2.1875rem);    
-  --normal-size: clamp(0.9375rem, 1.5vw, 0.9375rem); 
-  --important-size: clamp(1.25rem, 3vw, 1.875rem); 
+  --big-title-size: clamp(2.5rem, 5vw, 4.375rem);
+  --title-size: clamp(1.5rem, 3vw, 2.1875rem);
+  --normal-size: clamp(0.9375rem, 1.5vw, 0.9375rem);
+  --important-size: clamp(1.25rem, 3vw, 1.875rem);
 
   --button-size: 25px;
 
@@ -63,10 +62,11 @@
   --link-color: #008cff;
   --link-color-hover: #00689c;
 
-  --green-color: #00FF55;
+  --green-color: #00ff55;
   --green-color-hover: #00cc33;
-  
-  --normal-padding: 20px 500px;
+
+  --normal-padding: 20px 350px;
+
   --normal-padding-media: 30px 20px;
 
   --input-padding: 5px;

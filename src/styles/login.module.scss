@@ -39,12 +39,6 @@
     font-family: var(--font-heading);
   }
 
-  .auth-container p {
-    margin: 0;
-    text-align: start;
-    width: 100%;
-  }
-
   /* ------------------- */
 
   .login-card,
@@ -110,8 +104,16 @@
     display: flex;
     margin-bottom: 15px;
     align-items: center;
-    justify-content: space-between;
+
     transition: all 0.3s ease-in-out;
+  }
+
+  .auth-container p {
+    margin: 0;
+  }
+
+  .linkTo {
+    width: 100%;
   }
 
   .auth-container img {

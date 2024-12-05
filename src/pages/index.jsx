@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "../components/loginForm";
 import { useMyContext } from "../components/store/ContextApi";
 
@@ -16,11 +16,10 @@ import facebookIcon from "../assets/icons/Login-Register-Form/facebook.svg";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const Index = () => {
-
   const { token } = useMyContext();
   const navigate = useNavigate();
 
-    // Si el usuario ya tiene un token, lo redirigimos al home
+  // Si el usuario ya tiene un token, lo redirigimos al home
   useEffect(() => {
     if (token) navigate("/"); // Redirige a la página principal si ya hay un token
   }, [navigate, token]);
