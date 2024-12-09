@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import styles from "../styles/components/question.module.scss";
 
-const Question = ({ key, question, alternatives }) => {
-  const abcd = ["A", "B", "C", "D"];
+const Question = ({ key, question, alternatives, correct }) => {
+  const abcd = ["A", "B", "C"];
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const refValue = useRef(key);
 
   function handleContainerClick(index) {
     setSelectedIndex(index);
   }
+
+  // Se asegura de que la respuesta correcta se seleccione al cargar
+  useEffect(() => {
+    // Aquí asignamos el valor de la respuesta correcta
+    const defaultSelectedIndex = alternatives.findIndex(
+      ([key, value]) => key === correct
+    );
+    setSelectedIndex(defaultSelectedIndex); // Establecemos la respuesta correcta
+  }, [alternatives, correct]);
 
   return (
     <React.Fragment>
@@ -25,22 +35,23 @@ const Question = ({ key, question, alternatives }) => {
           <h1>{question}</h1>
         </motion.div>
         <div className={styles["alternatives-container"]}>
-          {alternatives.map((alternative, index) => (
+          {alternatives.map(([keyVal, value], altIndex) => (
             <motion.div
-              key={index}
+              key={altIndex}
               className={`${styles.alternative}`}
-              onClick={() => handleContainerClick(index)}
+              onClick={() => handleContainerClick(altIndex)}
+              ref={refValue}
               initial={{ opacity: 0, y: 20 }}
               animate={{
                 opacity: 1,
                 y: 0,
-                scale: selectedIndex === index ? 1.01 : 1,
+                scale: selectedIndex === altIndex ? 1.01 : 1,
                 boxShadow:
-                  selectedIndex === index
+                  selectedIndex === altIndex
                     ? "0px 4px 10px rgba(0, 128, 0, 0.3)"
                     : "none",
                 backgroundImage:
-                  selectedIndex === index
+                  selectedIndex === altIndex
                     ? "var(--correct-answer)"
                     : "var(--normal-answer)",
               }}
@@ -53,13 +64,15 @@ const Question = ({ key, question, alternatives }) => {
             >
               <input
                 type="radio"
-                id={index}
+                id={altIndex}
                 name="alternative"
                 style={{ visibility: "hidden", position: "absolute" }}
+                defaultChecked={keyVal === correct}
               />
-              <label style={{ width: "100%" }} htmlFor={index}>
-                <span>{abcd[index]}</span>
-                {alternative}
+
+              <label style={{ width: "100%" }} htmlFor={altIndex}>
+                <span>{abcd[altIndex]}</span>
+                {value}
               </label>
             </motion.div>
           ))}

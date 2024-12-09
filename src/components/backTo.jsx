@@ -9,12 +9,14 @@ const BackTo = ({ backTo, nextTo, action }) => {
   const handleClick = async () => {
     try {
       if (action) {
-        const result = action(); 
+        const result = action();
         if (result instanceof Promise) {
           await result;
         }
       }
-      navigate(nextTo);
+      if (nextTo) {
+        navigate(nextTo);
+      }
     } catch (error) {
       console.error("Error al ejecutar la acción:", error);
     }

@@ -45,7 +45,7 @@ function App() {
             }
           />
           <Route
-            path="/quizDetails/:content"
+            path="/quizDetails/:balotarioId"
             element={
               <MainLayout title="Detalles del Quiz">
                 <QuizDetails />
@@ -53,7 +53,7 @@ function App() {
             }
           />
           <Route
-            path="/quizManagement"
+            path="/quizManagement/:balotarioId"
             element={
               <SecondLayout title="Gestión del quiz">
                 <ApproveQuestions />
@@ -61,7 +61,7 @@ function App() {
             }
           />
           <Route
-            path="/quizReview"
+            path="/quizReview/:balotarioId"
             element={
               <SecondLayout title="Confirmacion del cuestionario">
                 <QuizReview />

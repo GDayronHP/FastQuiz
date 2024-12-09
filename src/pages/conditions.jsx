@@ -1,7 +1,20 @@
 import React from "react";
 import styles from "../styles/conditions.module.scss";
 
+import { useMyContext } from "../components/store/ContextApi";
+import { useNavigate } from "react-router-dom";
+
 function Conditions() {
+
+  const navigate = useNavigate();
+  
+  const { token } = useMyContext(); 
+  useEffect(() => {
+    if (!token) {
+      alert("No estás autenticado. Por favor, inicia sesión.");
+      navigate("/");
+    }
+  }, [token, navigate]);
   return (
     <div className={styles.conditions}>
       <div className={styles["terms-container"]}>

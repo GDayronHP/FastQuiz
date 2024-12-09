@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Login from "../components/loginForm";
 import { useMyContext } from "../components/store/ContextApi";
-
 import styles from "../styles/login.module.scss";
-
 import wave1 from "../assets/images/wave1.svg";
 import wave2 from "../assets/images/wave2.svg";
 import wave3 from "../assets/images/wave3.svg";
@@ -15,31 +13,25 @@ import emailIcon from "../assets/icons/Login-Register-Form/email.svg";
 import facebookIcon from "../assets/icons/Login-Register-Form/facebook.svg";
 
 const apiUrl = import.meta.env.VITE_API_URL;
+
 const Index = () => {
-  const { token } = useMyContext();
-  const navigate = useNavigate();
 
-  // Si el usuario ya tiene un token, lo redirigimos al home
-  useEffect(() => {
-    if (token) navigate("/"); // Redirige a la página principal si ya hay un token
-  }, [navigate, token]);
-
-  const [hide, setHide] = useState(false);
+  const [hide, setHide] = useState(false); // Estado para ocultar o mostrar formularios
 
   const handleClick = () => {
-    setHide(!hide);
+    setHide(!hide); // Alterna entre mostrar/ocultar el formulario de inicio y registro
   };
 
   return (
     <div className={styles.login}>
-      {/* waves */}
+      {/* Fondo con imágenes de olas */}
       <div className={styles["bg-images"]}>
         <img src={wave1} alt="" />
         <img src={wave2} alt="" />
         <img src={wave3} alt="" />
       </div>
 
-      {/* Login Form */}
+      {/* Formulario de inicio de sesión */}
       <section
         className={`${styles["login-card"]} ${
           hide ? styles.hideForm : styles.showForm
@@ -72,7 +64,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Register Form */}
+      {/* Formulario de registro */}
       <section
         className={`${styles["register-card"]} ${
           hide ? styles.showForm : styles.hideForm

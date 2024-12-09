@@ -61,6 +61,7 @@
   margin: 5px 0px;
   padding: var(--input-padding);
   border-bottom: 1px solid var(--white-o);
+  
 }
 
 .selectNumber {
@@ -71,11 +72,20 @@
   border-bottom: 1px solid var(--white-o);
 }
 
+.input,
+.select,
+.selectNumber {
+  background-color: var(--bg-secondary);
+  color: white;
+}
+
 .input:focus,
 .select:focus,
 .selectNumber:focus {
   border-bottom: 1px solid var(--white);
+
 }
+
 
 /* Lista de templates de prompt */
 

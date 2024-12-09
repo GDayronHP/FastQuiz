@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 
 import "react-multi-carousel/lib/styles.css";
 
@@ -7,25 +7,18 @@ import styles from "../styles/quizDetails.module.scss";
 
 
 
-const QuizStyle = ({ srcs }) => {
+const QuizStyle = ({ srcs, estiloRef }) => {
   // const styleSelected = useRef(null);
-  const [selectedStyle, setSelectedStyle] = useState(null);
-
-  useEffect(() => {
-    setSelectedStyle(1);
-    // styleSelectedP(1);
-  }, []);
+  const [selectedStyle, setSelectedStyle] = useState({'index': 0, 'src': 'https://png.pngtree.com/thumb_back/fh260/background/20210803/pngtree-modern-simple-elegant-dark-blue-landing-page-website-background-image_756950.jpg'});
 
   // const styleSelectedP = (index) => {
   //   styleSelected.current.textContent = ` Estilo ${index + 1} seleccionado `;
   // };
 
-  const handleSelectStyle = (index) => {
-    setSelectedStyle(index);
+  const handleSelectStyle = (e, index) => {
+    setSelectedStyle({'index': index, 'src': e.target.src});
+    estiloRef.current = selectedStyle.src;
 
-    // setTimeout(() => {
-    //   styleSelectedP(index);
-    // }, 500);
   };
 
   return (
@@ -44,12 +37,12 @@ const QuizStyle = ({ srcs }) => {
         {srcs.map((_, index) => (
           <div key={index} className={styles.style}>
             <img
-              className={selectedStyle == index ? styles["image-selected"] : ""}
+              className={selectedStyle.index == index ? styles["image-selected"] : ""}
               src={srcs[index]}
               alt={`Estilo ${index + 1}`}
-              onClick={() => handleSelectStyle(index)}
+              onClick={(e) => handleSelectStyle(e, index)}
             />
-            {selectedStyle == index ? (
+            {selectedStyle.index == index ? (
               <div className={styles["image-selected-p"]}>
                 <p>Seleccionado</p>
               </div>

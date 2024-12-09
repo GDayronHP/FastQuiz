@@ -1,45 +1,45 @@
-import React, { createContext, useContext, useState } from "react";
-import { useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import api from "../../services/api";
 import toast from "react-hot-toast";
 
 const ContextApi = createContext();
 
 export const ContextProvider = ({ children }) => {
-  //find the token in the localstorage
-  const getToken = localStorage.getItem("JWT_TOKEN")
-    ? JSON.stringify(localStorage.getItem("JWT_TOKEN"))
-    : null;
-  //find is the user status from the localstorage
-  const isADmin = localStorage.getItem("IS_ADMIN")
-    ? JSON.stringify(localStorage.getItem("IS_ADMIN"))
-    : false;
+  // Obtener el token y el estado de admin desde localStorage
+  const getToken = localStorage.getItem("JWT_TOKEN") || null;
+  const isADmin = localStorage.getItem("IS_ADMIN") || false;
 
-  //store the token
+  // Estado para el token
   const [token, setToken] = useState(getToken);
 
-  //store the current loggedin user
+  // Estado para el usuario actual
   const [currentUser, setCurrentUser] = useState(null);
-  //handle sidebar opening and closing in the admin panel
+
+  // Estado para el estado del sidebar en el panel de administración
   const [openSidebar, setOpenSidebar] = useState(true);
-  //check the loggedin user is admin or not
+
+  // Estado si el usuario es admin
   const [isAdmin, setIsAdmin] = useState(isADmin);
 
+  // Función para obtener el usuario actual
   const fetchUser = async () => {
-    const user = JSON.parse(localStorage.getItem("USER"));
-
-    if (user?.username) {
+    if (token) {
       try {
-        const { data } = await api.get(`/auth/user`);
+        const { data } = await api.get(`/auth/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
         const roles = data.roles;
 
+        // Verificar si el usuario es admin
         if (roles.includes("ROLE_ADMIN")) {
-          localStorage.setItem("IS_ADMIN", JSON.stringify(true));
+          localStorage.setItem("IS_ADMIN", true);
           setIsAdmin(true);
         } else {
           localStorage.removeItem("IS_ADMIN");
           setIsAdmin(false);
         }
+
         setCurrentUser(data);
       } catch (error) {
         console.error("Error fetching current user", error);
@@ -48,14 +48,17 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  //if  token exist fetch the current user
+  // Sincronizar el token con localStorage
   useEffect(() => {
     if (token) {
-      fetchUser();
+      localStorage.setItem("JWT_TOKEN", token);
+      fetchUser(); // Cargar usuario si hay un token
+    } else {
+      localStorage.removeItem("JWT_TOKEN");
     }
   }, [token]);
 
-  //through context provider you are sending all the datas so that we access at anywhere in your application
+  // Proveer los datos de contexto
   return (
     <ContextApi.Provider
       value={{
@@ -74,9 +77,11 @@ export const ContextProvider = ({ children }) => {
   );
 };
 
-//by using this (useMyContext) custom hook we can reach our context provier and access the datas across our components
+// Custom hook para acceder al contexto
 export const useMyContext = () => {
   const context = useContext(ContextApi);
-
+  if (!context) {
+    throw new Error("useMyContext debe usarse dentro de un ContextProvider");
+  }
   return context;
 };

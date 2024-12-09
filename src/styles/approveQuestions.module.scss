@@ -216,6 +216,17 @@
     position: relative;
     padding: 5px;
     color: white;
+
+    .no-more-questions {
+      color: var(--gray);
+      font-family: var(--font-heading);
+      font-size: clamp(1em, 5vw, 1.3em);
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      text-align: center;
+    }
   }
 
   .question-actions {

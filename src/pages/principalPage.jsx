@@ -17,7 +17,6 @@ import styles from "../styles/principalPage.module.scss";
 
 const PrincPg = () => {
   const { token } = useMyContext();
-
   const navigate = useNavigate();
 
   const mainRef = useRef(null);
@@ -29,6 +28,14 @@ const PrincPg = () => {
     tema: "",
     alternativas: "",
   });
+
+  // Verifica si hay un token válido antes de continuar
+  useEffect(() => {
+    if (!token) {
+      alert("No estás autenticado. Por favor, inicia sesión.");
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   const handleSubmit = () => {
     const { cantidadPreguntas, dificultad, tema, alternativas } = inputs;
@@ -44,34 +51,53 @@ const PrincPg = () => {
   };
 
   const enviarPrompt = async (prompt) => {
-    if (prompt !== "") {
-      try {
-        setLoading(true);
-        if (mainRef.current) {
-          mainRef.current.style.filter = "blur(15px)";
-          mainRef.current.style.pointerEvents = "none";
-          mainRef.current.style.overflow = "hidden";
-        }
-
-        const response = await TeacherService.createPrompt(prompt, token);
-        console.log("Respuesta completa:", response);
-        console.log("Respuesta recibida:", response.data);
-      } catch (error) {
-        console.error(
-          "Error al crear el prompt:",
-          error.response ? error.response.data : error.message
-        );
-      } finally {
-        setLoading(false);
-        if (mainRef.current) {
-          mainRef.current.style.filter = "blur(0px)";
-          mainRef.current.style.pointerEvents = "auto";
-          mainRef.current.style.overflow = "auto";
-        }
-        navigate("/quizDetails/hola");
-      }
-    } else {
+    if (!prompt) {
       alert("El prompt está vacío, ingrese información por favor");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // Deshabilitar interacción con la UI mientras se procesa
+      if (mainRef.current) {
+        mainRef.current.style.filter = "blur(15px)";
+        mainRef.current.style.pointerEvents = "none";
+        mainRef.current.style.overflow = "hidden";
+      }
+
+      const response = await TeacherService.createPrompt(prompt, token);
+      console.log("Respuesta completa:", response);
+
+      if (localStorage.getItem("balotario")) {
+        localStorage.removeItem("balotario");
+      } else {
+        localStorage.setItem("balotario", JSON.stringify(response));
+      }
+     
+      // Verificar que la respuesta contiene datos antes de redirigir
+      const balotarioData = JSON.parse(localStorage.getItem("balotario"));
+      if (balotarioData && balotarioData.length > 0) {
+        navigate(`/quizDetails/${balotarioData[0].id}`);
+      } else {
+        alert("No se encontraron datos válidos para redirigir.");
+      }
+    } catch (error) {
+      console.error(
+        "Error al crear el prompt:",
+        error.response ? error.response.data : error.message
+      );
+      alert(
+        "Hubo un problema al crear el prompt. Por favor, inténtalo de nuevo."
+      );
+    } finally {
+      // Restaurar la interfaz de usuario al finalizar
+      setLoading(false);
+      if (mainRef.current) {
+        mainRef.current.style.filter = "blur(0px)";
+        mainRef.current.style.pointerEvents = "auto";
+        mainRef.current.style.overflow = "auto";
+      }
     }
   };
 
@@ -119,7 +145,13 @@ const PrincPg = () => {
             setInputs={setInputs}
           />
 
-          <BackTo backTo={"/"} nextTo={null} action={() => handleSubmit()} />
+          {/* Deshabilitar botón cuando está en loading */}
+          <BackTo
+            backTo={"/"}
+            nextTo={null}
+            action={handleSubmit}
+            disabled={loading}
+          />
         </motion.section>
       </main>
       {loading && <Loader />}

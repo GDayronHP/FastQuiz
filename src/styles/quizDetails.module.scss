@@ -63,6 +63,31 @@
       border-radius: var(--normal-radius);
       font-family: var(--font-body);
     }
+    
+  }
+
+  input[type=radio] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--white);
+    border-radius: 50%; 
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+  }
+  
+  input[type=radio]:checked::after {
+
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--white);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .slideContainer {

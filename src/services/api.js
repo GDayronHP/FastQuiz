@@ -24,10 +24,11 @@ api.interceptors.request.use(
     if (!csrfToken) {
       try {
         const response = await axios.get(
-          `${import.meta.vite}/api/csrf-token`,
+          `${import.meta.env.VITE_API_URL}/api/csrf-token`,
           { withCredentials: true }
         );
         csrfToken = response.data.token;
+        console.log("CSRF Token fetched from API:", csrfToken); // Log para verificar el token
         localStorage.setItem("CSRF_TOKEN", csrfToken);
       } catch (error) {
         console.error("Failed to fetch CSRF token", error);
@@ -37,7 +38,7 @@ api.interceptors.request.use(
     if (csrfToken) {
       config.headers["X-XSRF-TOKEN"] = csrfToken;
     }
-    console.log("X-XSRF-TOKEN " + csrfToken);
+    console.log("X-XSRF-TOKEN:", csrfToken); // Log para verificar el token
     return config;
   },
   (error) => {

@@ -1,19 +1,17 @@
 .quiz-config {
-
-  input {
+  input[type="radio"] {
     width: 20px;
     height: 20px;
     border: 2px solid var(--white);
-    border-radius: 50%; 
+    border-radius: 50%;
     display: inline-block;
     position: relative;
     cursor: pointer;
     appearance: none;
   }
-  
-  input:checked::after {
 
-    content: '';
+  input:checked::after {
+    content: "";
     width: 10px;
     height: 10px;
     background-color: var(--white);
@@ -23,7 +21,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
 
   .quiz-data-container {
     font-family: var(--font-heading);
@@ -35,24 +32,29 @@
 
   .quiz-data-container {
     .title,
-    .questions-type {
+    .description {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+    }
+
+    input {
+      text-align: end;
     }
   }
 
   .question-container {
     color: white;
     border-radius: var(--normal-radius);
-    box-shadow: 0 0 20px var(--black-o);
+    box-shadow: 0 0 10px var(--black-o);
     margin: var(--normal-margin) 0;
 
     .header {
       display: flex;
       justify-content: space-between;
-      padding: 20px;
+      align-items: center;
+      padding: 10px;
       background-color: var(--bg-secondary);
       border-radius: 5px 5px 0 0;
 
@@ -84,8 +86,8 @@
 
         .edit-btn img,
         .dlt-btn img {
-          width: 20px;
-          height: 20px;
+          width: 21px;
+          height: 21px;
         }
 
         .edit-btn:hover,
@@ -111,7 +113,7 @@
       font-family: var(--font-body);
       background-color: var(--bg-secondary-hover);
       border-radius: 0 0 5px 5px;
-      padding: 20px;
+      padding: 10px;
 
       &.active {
         pointer-events: auto;
@@ -141,6 +143,29 @@
           pointer-events: auto;
         }
       }
+
+      .time-container {
+        color: var(--white-hover);
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 15px 0;
+        width: 100%;
+
+        label {
+          font-size: 1.1em;
+        }
+
+        input[type="number"] {
+          font-size: 1em;
+          background-color: var(--black-o);
+          height: 100%;
+          text-align: end;
+          padding: 5px;
+          width: 60px;
+          border: 0;
+          border-radius: 5px;
+        }
+      }
     }
   }
 
@@ -163,6 +188,20 @@
     .question-container .header .options-container {
       width: 40%;
     }
+
+    .question-container {
+      .body {
+        .time-container {
+          label {
+            font-size: 1em;
+          }
+          input[type="number"] {
+            width: 30px;
+            font-size: 0.9em;
+          }
+        }
+      }
+    }
   }
   @media (max-width: 430px) {
     .question-container .header h1 {
@@ -174,7 +213,7 @@
 
     .quiz-data-container {
       .title,
-      .questions-type {
+      .description{
         font-size: 0.7em;
       }
     }

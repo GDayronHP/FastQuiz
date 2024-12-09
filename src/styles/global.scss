@@ -21,6 +21,9 @@ body {
 }
 
 /* Navbar */
+.navBar img {
+  height: 35px;
+}
 
 .navBar {
   position: sticky;
@@ -31,7 +34,7 @@ body {
 }
 
 .navBar ul {
-  padding: 20px 250px;
+  padding: var(--normal-padding);
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -40,8 +43,12 @@ body {
 
 .navBar .left {
   display: flex;
-  width: 10%;
   justify-content: space-between;
+  align-items: center;
+
+  & .logo {
+    margin-right: 15px;
+  }
 }
 
 .navBar li a {
@@ -51,15 +58,16 @@ body {
 
 /* Dashboard */
 
-.dashboard {
-  background-color: var(--bg-secondary);
+.logout-btn {
+  color: white;
+  background-color: var(--bg-tertiary);
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.1s ease-out;
 }
 
-.dashboard:hover {
-  background-color: var(--bg-secondary-hover);
+.logout-btn:hover {
+  background-color: var(--bg-tertiary-hover);
 }
 
 /* Inputs */

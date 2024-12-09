@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Question from "../components/question.jsx";
-import { Link } from "react-router-dom";
-
-import data from "../components/testData/data";
+import { Link, useParams } from "react-router-dom";
+import { useMyContext } from "../components/store/ContextApi";
+import { useNavigate } from "react-router-dom";
 
 import styles from "../styles/approveQuestions.module.scss";
 
@@ -11,61 +11,129 @@ import backRow from "../assets/icons/nextRow.svg";
 import nextRow from "../assets/icons/nextRow.svg";
 import bigBack from "../assets/icons/bigBack.svg";
 import approved from "../assets/icons/approved.svg";
-
 import backRow2 from "../assets/icons/backRow.svg";
 import loading from "../assets/icons/loading.svg";
 import plus from "../assets/icons/plus.svg";
 import bigNext from "../assets/icons/bigNext.svg";
 
+import TeacherService from "../services/teacherService.js";
+
 const ApproveQuestions = () => {
-  /* No se usaron estados para otros componentes debido a que no lo vi necesario */
+  const { token } = useMyContext();
+  const { balotarioId } = useParams();
+  const navigate = useNavigate();
+
+  const balotario = JSON.parse(localStorage.getItem("balotario")).filter(
+    (bal) => bal.id === Number(balotarioId)
+  )[0];
+
+  const [data, setData] = useState({
+    preguntas: [],
+    alternativas: [],
+    correctas: [],
+  });
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1000);
   const isSideBarResponsive = window.innerWidth < 700;
   const toggleBtn = useRef(null);
 
   const [approvedList, setApprovedList] = useState([]);
-  const [indexData, setIndexData] = useState(1);
-  const [preparedData, setPreparedData] = useState(() => {
-    // Encontramos el objeto de datos correspondiente a 'indexData'
-    const foundObject = data.find((item) => item.key === indexData);
-    return foundObject
-      ? {
-          ...foundObject,
-          alternatives: foundObject.alternatives.map(
-            (alternative) => alternative.alternative
-          ),
-        }
-      : null;
-  });
+  const [indexData, setIndexData] = useState(0);
+  const [preparedData, setPreparedData] = useState(null);
 
-  const anotherData = () => {
-    setIndexData((prevIndexData) => {
-      const newIndex = prevIndexData + 1;
-      return newIndex;
-    });
+  useEffect(() => {
+    // Recupera la lista de preguntas aprobadas desde localStorage si ya existe
+    const storedApprovedList = JSON.parse(localStorage.getItem("approvedList"));
+    if (storedApprovedList) {
+      setApprovedList(storedApprovedList);
+    }
+    console.log(balotario);
+  }, []);
 
-    setApprovedList((prevApprovedList) => [
-      ...prevApprovedList,
-      preparedData.question,
-    ]);
+  useEffect(() => {
+    const updatedApprovedList = approvedList.map((item) => ({
+      ...item,
+      required: true,
+      time: 30,
+    }));
+
+    localStorage.setItem("approvedList", JSON.stringify(updatedApprovedList));
+
+    console.log(localStorage.getItem("approvedList"));
+  }, [approvedList]);
+
+  useEffect(() => {
+    if (!token) {
+      alert("No estás autenticado. Por favor, inicia sesión.");
+      navigate("/");
+    } else {
+      defineData();
+    }
+  }, [balotarioId, token, navigate]);
+
+  const defineData = async () => {
+    try {
+      const response = await TeacherService.getQuestionData(
+        balotario,
+        balotarioId,
+        token
+      );
+
+      if (
+        !response ||
+        !Array.isArray(response.preguntas) ||
+        !Array.isArray(response.alternativas)
+      ) {
+        console.error("Formato de datos inválido:", response);
+        alert("Error: los datos no están en el formato esperado.");
+        return;
+      }
+
+      setData({
+        preguntas: response.preguntas,
+        alternativas: response.alternativas,
+        correctas: response.correctas,
+      });
+
+      // Configura la primera pregunta como inicial
+      setPreparedData({
+        question: response.preguntas[0],
+        alternatives: Object.entries(response.alternativas[0]),
+        correct: response.correctas["Respuesta 1"],
+      });
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
   };
 
-  // Usamos un `useEffect` para escuchar cambios en `indexData` y actualizar `preparedData`
-  useEffect(() => {
-    const foundObject = data.find((item) => item.key === indexData);
-
-    if (foundObject) {
-      setPreparedData({
-        ...foundObject,
-        alternatives: foundObject.alternatives.map(
-          (alternative) => alternative.alternative
-        ),
-      });
-    } else {
-      setPreparedData(null);
+  const anotherData = (accept) => {
+    if (accept) {
+      setApprovedList((prevApprovedList) => [
+        ...prevApprovedList,
+        {
+          question: preparedData.question,
+          alternatives: preparedData.alternatives,
+          correct: preparedData.correct,
+        },
+      ]);
     }
-  }, [indexData]);
+
+    setIndexData((prevIndexData) => {
+      const newIndex = prevIndexData + 1;
+
+      if (data.preguntas[newIndex]) {
+        setPreparedData({
+          question: data.preguntas[newIndex],
+          alternatives: Object.entries(data.alternativas[newIndex]),
+          correct: data.correctas[`Respuesta ${newIndex + 1}`],
+        });
+      } else {
+        setPreparedData(null);
+      }
+
+      return newIndex;
+    });
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,8 +146,6 @@ const ApproveQuestions = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const questionsContainer = useRef(null);
 
   const toggleSidebar = () => {
     toggleBtn.current.style.transform =
@@ -124,7 +190,7 @@ const ApproveQuestions = () => {
           >
             <div className={styles["config-options"]}>
               <button className={styles["backBtn"]}>
-                <Link to="/quizDetails/:data">
+                <Link to={`/quizDetails/${balotarioId}`}>
                   <img src={backRow} alt="backIcon" />
                   Volver
                 </Link>
@@ -132,31 +198,25 @@ const ApproveQuestions = () => {
               <div className={styles["infoContainer"]}>
                 <div>
                   <h2>Tema</h2>
-                  <h1>SCRUM</h1>
+                  <h1>{balotario.tema}</h1>
                 </div>
               </div>
               <hr />
               <div className={styles["approved-container"]}>
                 <div className={styles["approved-count"]}>
                   <img src={approved} alt="" />
-                  <p>Preguntas aprobadas: 2</p>
+                  <p>Preguntas aprobadas: {approvedList.length}</p>
                 </div>
                 <div className={styles["approved"]}>
-                  {approvedList.map((approved) => {
-                    return (
-                      <div>
-                        <p>{approved}</p>
-                      </div>
-                    );
-                  })}
+                  {approvedList.map((approved, index) => (
+                    <div key={index}>
+                      <p>{approved.question}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div
-                className={styles["questionsContainer"]}
-                ref={questionsContainer}
-              ></div>
               <button className={styles["finishQuiz"]}>
-                <Link to="/quizReview" href="#">
+                <Link to={`/quizReview/${balotarioId}`} href="#">
                   Finalizar Cuestionario
                 </Link>
               </button>
@@ -183,6 +243,7 @@ const ApproveQuestions = () => {
           transition={{ duration: 0.2, ease: "easeInOut", delay: 0.2 }}
         />
       </motion.button>
+
       <motion.section
         className={styles["main-content"]}
         style={{ flex: 1 }}
@@ -205,61 +266,63 @@ const ApproveQuestions = () => {
           </div>
         </header>
 
-        {/* Componente para renderizar las preguntas con sus alterntivas de acuerdo al indice */}
-
         {preparedData ? (
-          <div className={styles["question-container"]}>
-            <Question
-              key={preparedData.key}
-              question={preparedData.question}
-              alternatives={preparedData.alternatives}
-            />
-          </div>
+          <>
+            <div className={styles["question-container"]}>
+              <Question
+                key={indexData}
+                question={preparedData.question}
+                alternatives={preparedData.alternatives}
+                correct={preparedData.correct}
+              />
+            </div>
+            <motion.div
+              className={styles["question-actions"]}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
+              <img className={styles.bigBack} src={bigBack} alt="" />
+              <motion.button
+                className={styles["refuseQuestion"]}
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.8,
+                  duration: 0.3,
+                  type: "spring",
+                  stiffness: 150,
+                }}
+                onClick={() => anotherData(false)}
+              >
+                <button href="">Rechazar</button>
+                <img src={loading} alt="loading" />
+              </motion.button>
+              <motion.button
+                className={styles["acceptQuestion"]}
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.9,
+                  duration: 0.3,
+                  type: "spring",
+                  stiffness: 150,
+                }}
+                onClick={() => anotherData(true)}
+              >
+                <button className={styles.accept}>Aceptar</button>
+                <img src={plus} alt="plusIcon" />
+              </motion.button>
+              <img className={styles.bigNext} src={bigNext} alt="" />
+            </motion.div>
+          </>
         ) : (
-          <p>Ya no hay más preguntas :(</p>
+          <p className={styles["no-more-questions"]}>
+            Ya no hay más preguntas :( <br /><br />
+            Puedes darle a finalizar cuestionario para continuar al siguiente
+            paso
+          </p>
         )}
-
-        {/* ------------------------------------------------------------------------- */}
-
-        <motion.div
-          className={styles["question-actions"]}
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
-          <img className={styles.bigBack} src={bigBack} alt="" />
-          <motion.button
-            className={styles["refuseQuestion"]}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.8,
-              duration: 0.3,
-              type: "spring",
-              stiffness: 150,
-            }}
-          >
-            <button href="">Rechazar</button>
-            <img src={loading} alt="loading" />
-          </motion.button>
-          <motion.button
-            className={styles["acceptQuestion"]}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.9,
-              duration: 0.3,
-              type: "spring",
-              stiffness: 150,
-            }}
-          >
-            <button className={styles.accept} onClick={anotherData}>
-              Aceptar
-            </button>
-            <img src={plus} alt="plus" />
-          </motion.button>
-          <img className={styles.bigNext} src={bigNext} alt="" />
-        </motion.div>
       </motion.section>
     </motion.div>
   );
