@@ -13,7 +13,6 @@ const Header = () => {
     localStorage.removeItem("USER");
     localStorage.removeItem("CSRF_TOKEN");
     localStorage.removeItem("IS_ADMIN");
-    localStorage.removeItem("balotario");
     localStorage.removeItem("approvedDeletes");
     localStorage.removeItem("approvedList");
     setToken(null);
