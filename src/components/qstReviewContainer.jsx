@@ -38,10 +38,10 @@ function QstReviewContainer({
       ).filter((bal) => bal.id === Number(balotarioId))[0];
 
       // Obtenemos los números de pregunta
-      const questionNumbers = storedQuestions.map(({question}) =>
-        question.match(/^\d+/) ? question.match(/^\d+/)[0] : ''
+      const questionNumbers = storedQuestions.map(({ question }) =>
+        question.match(/^\d+/) ? question.match(/^\d+/)[0] : ""
       );
-      
+
       setQuestionNumbers(questionNumbers);
 
       // Creamos el objeto para el cuestionario
@@ -59,7 +59,6 @@ function QstReviewContainer({
       // Llamamos a setQuestionnaireData para establecer la información del cuestionario
       setQuestionnaireData(questionnaireData);
       setQuestions(storedQuestions);
-
     }
   }, [balotarioId, setQuestionnaireData]);
 
@@ -76,7 +75,9 @@ function QstReviewContainer({
       // Llamar a setQuestionnaireData con los datos actualizados
       setQuestionnaireData({
         ...questionnaireData,
-        clavesPreguntas: updatedQuestions.map((question) => question.question), // Solo las claves
+        clavesPreguntas: updatedQuestions.map(
+          (__, index) => `Pregunta ${questionNumbers[index]}`
+        ), // Solo las claves
       });
 
       return updatedQuestions;

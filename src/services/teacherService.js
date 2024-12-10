@@ -177,6 +177,7 @@ class TeacherService {
     await this.validateToken(token);
 
     let csrfToken = localStorage.getItem("CSRF_TOKEN");
+
     if (!csrfToken) {
       try {
         const response = await axios.get(

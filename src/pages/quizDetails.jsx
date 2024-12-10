@@ -103,7 +103,7 @@ const QuizDetails = () => {
 
   return (
     <div className={styles["quiz-details"]}>
-      {data.preguntas.length > 0 ? (
+      {/* {data.preguntas.length > 0 ? (
         data.preguntas.map((pregunta, index) => (
           <form key={index}>
             <label>{pregunta}</label>
@@ -133,7 +133,7 @@ const QuizDetails = () => {
         ))
       ) : (
         <p>No hay preguntas disponibles.</p>
-      )}
+      )} */}
 
       <div className={styles.forms}>
         <motion.div

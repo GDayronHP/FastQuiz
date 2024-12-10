@@ -69,7 +69,7 @@ function App() {
             }
           />
           <Route
-            path="/studentEvaluation"
+            path="/studentEvaluation/:cuestionarioId"
             element={
               <SecondLayout title="Evaluación">
                 <StudentEvaluation />
@@ -77,7 +77,7 @@ function App() {
             }
           />
           <Route
-            path="/studentResults"
+            path="/studentResults/:cuestionarioId"
             element={
               <SecondLayout title="Evaluación">
                 <Results />

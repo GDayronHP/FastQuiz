@@ -28,11 +28,12 @@ api.interceptors.request.use(
           { withCredentials: true }
         );
         csrfToken = response.data.token;
-        console.log("CSRF Token fetched from API:", csrfToken); // Log para verificar el token
         localStorage.setItem("CSRF_TOKEN", csrfToken);
       } catch (error) {
         console.error("Failed to fetch CSRF token", error);
+
       }
+      
     }
 
     if (csrfToken) {

@@ -90,7 +90,7 @@ const Index = () => {
           <p>¿Ya posees una cuenta?</p>
           <div className={styles.toLogin} onClick={handleClick}>
             <img className={styles.icon} src={nextBtn} alt="nextBtn" />
-            <Link to="/principalPage">Iniciar Sesión</Link>
+            <pattern>Iniciar Sesión</pattern>
           </div>
         </div>
         <div className={styles["register-image"]}>

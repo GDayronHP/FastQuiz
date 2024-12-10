@@ -5,7 +5,7 @@ import listPlus from "../assets/icons/listPlus.svg";
 const PromptGenerator = ({ inputs, setInputs }) => {
   const [promptTemplates, setPromptTemplates] = useState(false);
   const [selectedPrompt, setSelectedPrompt] = useState(
-    "Por favor, deme {cantidadPreguntas} preguntas {dificultad} sobre {tema} con {alternativas} alternativas de cada pregunta y su respuesta correcta intercalada. Por"
+    "Por favor, deme {cantidadPreguntas} preguntas {dificultad} sobre {tema} con {alternativas} alternativas de cada pregunta y su respuesta correcta intercada, desde la a hasta la c por ejemplo"
   );
   const [currentSelectedPrompt, setCurrentSelectedPrompt] =
     useState(selectedPrompt);

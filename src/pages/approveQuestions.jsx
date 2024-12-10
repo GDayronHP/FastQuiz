@@ -130,7 +130,8 @@ const ApproveQuestions = () => {
       } else {
         setPreparedData(null);
       }
-
+      
+      console.log(data);
       return newIndex;
     });
   };
@@ -270,7 +271,6 @@ const ApproveQuestions = () => {
           <>
             <div className={styles["question-container"]}>
               <Question
-                key={indexData}
                 question={preparedData.question}
                 alternatives={preparedData.alternatives}
                 correct={preparedData.correct}

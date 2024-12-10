@@ -1,23 +1,37 @@
-import React from "react";
+import React,{ useEffect, useState }  from "react";
 import styles from "../../styles/student/results.module.scss";
 
 import normalAnimation from "../../components/animation/normalAnimation.js";
 
 import { motion } from "framer-motion";
+import questionnaireService from "../../services/questionnaireService.js";
+import { useMyContext } from "../../components/store/ContextApi.jsx";
+import { useParams } from "react-router-dom";
 function Results() {
   // Datos de ejemplo
-  const score = 40; // Puntaje
-  const streak = 6; // Racha
-  const correct = 10; // Preguntas correctas
-  const incorrect = 0; // Preguntas incorrectas
+  const [score, setScore] = useState(40); // Puntaje
+  const [streak, setStreak] = useState(6); // Racha
+  const [correct, setCorrect] = useState(10); // Preguntas correctas
+  const [incorrect, setIncorrect] = useState(0); // Preguntas incorrectas
   const tema = "Diseño web"; // Tema de la prueba
-  const time = "01:30"; // Tiempo transcurrido
+  const time = localStorage.getItem("timeEnded"); // Tiempo transcurrido
 
-  console.log({ ...normalAnimation });
+  const { cuestionarioId } = useParams();
+  const { token } = useMyContext();
 
   // Lógica para el mensaje basado en el puntaje
   const message =
     score > 80 ? "¡FELICIDADES!" : score > 50 ? "¡BIEN HECHO!" : "SIGUE ASÍ";
+
+  const obtainResults = async() => {
+    const results = await questionnaireService.compareQuestionnaireResults(cuestionarioId, token);
+
+    console.log(results);
+  }
+
+  useEffect(()=> {
+    obtainResults();
+  })
 
   return (
     <div className={styles.container}>

@@ -129,38 +129,41 @@ class QuestionnaireService {
   }
 
   async publishQuestionnaire(id, data, token) {
-    const csrfToken = await this.fetchCSRFToken(); 
+    const csrfToken = await this.fetchCSRFToken();
     const publicationData = {
-        fechaInicio: data.fechaInicio,
-        fechaFin: data.fechaFin,
-        urlPublica: `http://localhost:8080/cuestionarios/cuestions/${id}`,
+      fechaInicio: data.fechaInicio,
+      fechaFin: data.fechaFin,
+      urlPublica: `http://localhost:8080/cuestionarios/cuestions/${id}`,
     };
 
     try {
-        // Aquí añadimos una llamada para obtener la URL pública con los headers necesarios.
-        await axios.get(publicationData.urlPublica, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "X-XSRF-TOKEN": csrfToken,
-            },
-            withCredentials: true,
-        });
+      // Aquí añadimos una llamada para obtener la URL pública con los headers necesarios.
+      await axios.get(publicationData.urlPublica, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "X-XSRF-TOKEN": csrfToken,
+        },
+        withCredentials: true,
+      });
 
-        const response = await axios.post(
-            `${QUESTIONNAIRE_BASE_API_URL}/publicar/${id}`,
-            publicationData,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "X-XSRF-TOKEN": csrfToken,
-                },
-                withCredentials: true,
-            }
-        );
-        return response.data;
+      const response = await axios.post(
+        `${QUESTIONNAIRE_BASE_API_URL}/publicar/${id}`,
+        publicationData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "X-XSRF-TOKEN": csrfToken,
+          },
+          withCredentials: true,
+        }
+      );
+      return response.data;
     } catch (error) {
-        console.error("Error al publicar el cuestionario:", error.response || error);
-        throw error;
+      console.error(
+        "Error al publicar el cuestionario:",
+        error.response || error
+      );
+      throw error;
     }
   }
 
@@ -177,6 +180,31 @@ class QuestionnaireService {
       });
     } catch (error) {
       console.error("Error al registrar respuestas:", error);
+      throw error;
+    }
+  }
+  // Método para obtener los resultados de la comparación del cuestionario
+  async compareQuestionnaireResults(cuestionarioId, token) {
+    const csrfToken = await this.fetchCSRFToken();
+    try {
+      // Realizamos la solicitud GET a la ruta comparativa de respuestas
+      const response = await axios.get(
+        `${QUESTIONNAIRE_BASE_API_URL}/comparar-cuestionario/${cuestionarioId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "X-XSRF-TOKEN": csrfToken,
+          },
+          withCredentials: true,
+        }
+      );
+      // Retornamos los resultados de la comparación
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Error al obtener los resultados de la comparación:",
+        error
+      );
       throw error;
     }
   }
