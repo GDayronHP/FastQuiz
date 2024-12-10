@@ -16,37 +16,32 @@ function StudentEvaluation() {
   const [correctSelected, setCorrectSelected] = useState({});
   const [registro, setRegistro] = useState([]);
   const [timeEnded, setTimeEnded] = useState(0);
+  const [examStarted, setExamStarted] = useState(false); // Nuevo estado
   const navigate = useNavigate();
   const { cuestionarioId } = useParams();
   const { token } = useMyContext();
 
-  useEffect(() => {
-    // Llama a la API una sola vez para cargar el cuestionario
-    const loadQuestionnaire = async () => {
-      try {
-        const response = await QuestionnaireService.getQuestionnaireById(
-          cuestionarioId,
-          token
-        );
-        if (!response || !response.preguntasSeleccionadas.length) {
-          console.error("Formato de datos inválido:", response);
-          alert("Error: los datos no están en el formato esperado.");
-          return;
-        }
-
-        setQuestions(response.preguntasSeleccionadas);
-        setTimeLeft(response.preguntasSeleccionadas[0].tiempo);
-        setTimerActive(true);
-      } catch (error) {
-        console.error("Error al obtener los datos del cuestionario:", error);
+  const loadQuestionnaire = async () => {
+    try {
+      const response = await QuestionnaireService.getQuestionnaireById(
+        cuestionarioId,
+        token
+      );
+      if (!response || !response.preguntasSeleccionadas.length) {
+        console.error("Formato de datos inválido:", response);
+        alert("Error: los datos no están en el formato esperado.");
+        return;
       }
-    };
 
-    loadQuestionnaire();
-  }, [cuestionarioId, token]);
+      setQuestions(response.preguntasSeleccionadas);
+      setTimeLeft(response.preguntasSeleccionadas[0].tiempo);
+      setTimerActive(true);
+    } catch (error) {
+      console.error("Error al obtener los datos del cuestionario:", error);
+    }
+  };
 
   useEffect(() => {
-    // Control del temporizador
     let timer;
     if (timerActive && timeLeft > 0) {
       timer = setInterval(() => {
@@ -64,13 +59,17 @@ function StudentEvaluation() {
     return () => clearInterval(timer);
   }, [timerActive, timeLeft]);
 
+  const handleStartExam = () => {
+    setExamStarted(true); // Activa el examen
+    loadQuestionnaire(); // Carga las preguntas
+  };
+
   const handleContinue = (timeEnded = false) => {
     const currentQuestion = questions[currentIndex];
     const selectedAnswer = timeEnded
       ? null
       : correctSelected[currentQuestion.id];
 
-    // Registra la respuesta
     setRegistro((prevRegistro) => [
       ...prevRegistro,
       {
@@ -79,7 +78,6 @@ function StudentEvaluation() {
       },
     ]);
 
-    // Avanza a la siguiente pregunta
     if (currentIndex < questions.length - 1) {
       const nextQuestion = questions[currentIndex + 1];
       setCurrentIndex(currentIndex + 1);
@@ -115,42 +113,52 @@ function StudentEvaluation() {
 
   return (
     <div className={styles.studentEvaluation}>
-      <motion.div {...normalAnimation(0.1)} className={styles.progressContainer}>
-        <progress value={currentIndex + 1} max={questions.length} />
-        <p className={styles.progressValue}>
-          {currentIndex + 1} / {questions.length}
-        </p>
-        <p>
-          Tiempo <span>{timeLeft}</span> segundos
-        </p>
-      </motion.div>
+      {!examStarted ? (
+        <div className={styles.startContainer}>
+          <button className={styles.startBtn} onClick={handleStartExam}>
+            Iniciar
+          </button>
+        </div>
+      ) : (
+        <>
+          <motion.div {...normalAnimation(0.1)} className={styles.progressContainer}>
+            <progress value={currentIndex + 1} max={questions.length} />
+            <p className={styles.progressValue}>
+              {currentIndex + 1} / {questions.length}
+            </p>
+            <p>
+              Tiempo <span>{timeLeft}</span> segundos
+            </p>
+          </motion.div>
 
-      <motion.div {...normalAnimation(0.2)} className={styles["question-container"]}>
-        {questions.length > 0 ? (
-          <Question
-            question={questions[currentIndex].textoPreguntaSeleccionada}
-            alternatives={questions[currentIndex].alternativas.map(
-              ({ clave, texto }) => [clave, texto]
+          <motion.div {...normalAnimation(0.2)} className={styles["question-container"]}>
+            {questions.length > 0 ? (
+              <Question
+                question={questions[currentIndex].textoPreguntaSeleccionada}
+                alternatives={questions[currentIndex].alternativas.map(
+                  ({ clave, texto }) => [clave, texto]
+                )}
+                correct={null}
+                setCorrectSelected={handleAnswerSelect}
+                preguntaSeleccionadaId={questions[currentIndex].id}
+                resetSelection={correctSelected[questions[currentIndex].id] === undefined}
+              />
+            ) : (
+              <p>Cargando...</p>
             )}
-            correct={null}
-            setCorrectSelected={handleAnswerSelect}
-            preguntaSeleccionadaId={questions[currentIndex].id}
-            resetSelection={correctSelected[questions[currentIndex].id] === undefined}
-          />
-        ) : (
-          <p>Cargando...</p>
-        )}
-      </motion.div>
-      <motion.div
-        className={`${styles.continueContainer}`}
-        {...normalAnimation(0.3)}
-        onClick={() => handleContinue(false)}
-      >
-        <button className={styles.continueBtn} disabled={timeLeft === 0}>
-          <p>Continuar</p>
-          <img src={nextRow} alt="Next" />
-        </button>
-      </motion.div>
+          </motion.div>
+          <motion.div
+            className={`${styles.continueContainer}`}
+            {...normalAnimation(0.3)}
+            onClick={() => handleContinue(false)}
+          >
+            <button className={styles.continueBtn} disabled={timeLeft === 0}>
+              <p>Continuar</p>
+              <img src={nextRow} alt="Next" />
+            </button>
+          </motion.div>
+        </>
+      )}
     </div>
   );
 }

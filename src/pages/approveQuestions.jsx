@@ -130,7 +130,7 @@ const ApproveQuestions = () => {
       } else {
         setPreparedData(null);
       }
-      
+
       console.log(data);
       return newIndex;
     });
@@ -190,12 +190,27 @@ const ApproveQuestions = () => {
             }}
           >
             <div className={styles["config-options"]}>
-              <button className={styles["backBtn"]}>
-                <Link to={`/quizDetails/${balotarioId}`}>
-                  <img src={backRow} alt="backIcon" />
-                  Volver
-                </Link>
-              </button>
+              <Link to={`/quizDetails/${balotarioId}`}>
+                <button className={styles["backBtn"]}>
+                  <svg
+                    width="22"
+                    height="43"
+                    viewBox="0 0 22 43"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{transform:"rotate(180deg)", height: '25px'}}
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M18.6212 22.7739L8.25005 32.9093L5.65771 30.3759L14.7327 21.5072L5.65771 12.6384L8.25005 10.105L18.6212 20.2405C18.9649 20.5765 19.158 21.0321 19.158 21.5072C19.158 21.9823 18.9649 22.4379 18.6212 22.7739Z"
+                      fill="black"
+                    />
+                  </svg>
+
+                  <p>Volver</p>
+                </button>
+              </Link>
               <div className={styles["infoContainer"]}>
                 <div>
                   <h2>Tema</h2>
@@ -222,9 +237,11 @@ const ApproveQuestions = () => {
                 </Link>
               </button>
             </div>
-            <button className={styles["refuseQuiz"]}>
-              <a href="#">Rechazar Cuestionario</a>
-            </button>
+            <Link to={`/quizDetails/${balotarioId}`}>
+              <button className={styles["refuseQuiz"]}>
+                <a href="#">Rechazar Cuestionario</a>
+              </button>
+            </Link>
           </motion.aside>
         )}
       </motion.section>
@@ -318,7 +335,8 @@ const ApproveQuestions = () => {
           </>
         ) : (
           <p className={styles["no-more-questions"]}>
-            Ya no hay más preguntas :( <br /><br />
+            Ya no hay más preguntas :( <br />
+            <br />
             Puedes darle a finalizar cuestionario para continuar al siguiente
             paso
           </p>

@@ -35,16 +35,14 @@
   .backBtn {
     background-color: var(--gray);
     margin-bottom: 10px;
-    padding: var(--input-padding);
+    padding: 5px 5px 5px 0;
     border-radius: var(--normal-radius);
     transition: all 0.1s ease-in-out;
     font-size: 15px;
     border: none;
-  }
-
-  .backBtn a {
     display: flex;
     align-items: center;
+    justify-content: start;
   }
 
   .backBtn img {

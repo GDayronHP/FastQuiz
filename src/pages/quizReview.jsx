@@ -9,6 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import QuestionnaireService from "../services/questionnaireService";
 
 import save from "../assets/icons/save.svg";
+import publish from "../assets/icons/publishIcon.svg";
 import styles from "../styles/quizReview.module.scss";
 
 const QuizReview = () => {
@@ -27,6 +28,17 @@ const QuizReview = () => {
   });
 
   const { token, currentUser } = useMyContext();
+  const [dateTime, setDateTime] = useState(
+    new Date().toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    })
+  );
+  const [published, setPublished] = useState(false);
+  const [cuestionarioId, setCuestionarioId] = useState();
+  const publishedUrl = useRef();
 
   useEffect(() => {
     if (!token) {
@@ -75,18 +87,19 @@ const QuizReview = () => {
       console.log("Cuestionario publicado:", publishedResponse);
       alert("Cuestionario creado y publicado exitosamente.");
 
-      const cuestionarioId = response.id;
+      setCuestionarioId(response.id);
 
-      setTimeout(()=> {
-        navigate(`/studentEvaluation/${cuestionarioId}`)
-      },1000)
-
+      setTimeout(() => {
+        setPublished(true);
+      }, 1000);
     } catch (error) {
       console.error(
         "Error al guardar o publicar el cuestionario:",
         error.response ? error.response.data : error.message
       );
-      alert("Hubo un problema al guardar o publicar el cuestionario. Inténtalo de nuevo.");
+      alert(
+        "Hubo un problema al guardar o publicar el cuestionario. Inténtalo de nuevo."
+      );
     } finally {
       setLoading(false);
       if (mainRef.current) {
@@ -95,6 +108,11 @@ const QuizReview = () => {
       }
     }
   };
+
+  const copyUrlToClipboard = () => {
+    navigator.clipboard.writeText(publishedUrl.current.value);
+    alert("URL copiada al portapapeles.");
+  }
 
   return (
     <div className={styles.quizReview} ref={mainRef}>
@@ -111,7 +129,7 @@ const QuizReview = () => {
         }}
       />
       <motion.div {...normalAnimation(0.3)} className={styles.saveContainer}>
-        <p ref={autosavedRef}>Autoguardado</p>
+        <p ref={autosavedRef}>Autoguardado a las {dateTime} </p>
         <Link
           className={styles.saveBtn}
           to="#"
@@ -124,7 +142,7 @@ const QuizReview = () => {
           <img src={save} alt="Guardar" />
         </Link>
         <Link
-          className={styles.saveBtn}
+          className={styles.publishBtn}
           to="#"
           onClick={(e) => {
             e.preventDefault();
@@ -132,9 +150,27 @@ const QuizReview = () => {
           }}
         >
           <p>Guardar y publicar</p>
-          <img src={save} alt="Guardar y publicar" />
+          <img src={publish} alt="Guardar y publicar" />
         </Link>
-      </motion.div> 
+        {published ? (
+            <div onClick={copyUrlToClipboard}  className={styles.copyBtn}>
+              <button title="Copiar" >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  style={{fill: 'rgba(255, 255, 255, 1)'}}
+                >
+                  <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
+                </svg>
+              </button>
+              <input className={styles.publishedUrlInput} type="text" hidden ref={publishedUrl} value={`http://localhost:5173/studentEvaluation/${cuestionarioId}`}/>
+            </div>
+          ) : (
+            ""
+          )}
+      </motion.div>
     </div>
   );
 };
