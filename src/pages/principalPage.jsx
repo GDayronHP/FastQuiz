@@ -45,9 +45,17 @@ const PrincPg = () => {
       return;
     }
 
-    const promptValue = `Por favor, deme ${cantidadPreguntas} preguntas ${dificultad} sobre ${tema} con ${alternativas} alternativas de cada pregunta y su respuesta correcta intercalada.`;
+    // Ajustamos el prompt para incluir de manera clara las respuestas correctas intercaladas con las alternativas.
+    const promptValue = `Por favor, dame ${cantidadPreguntas} preguntas ${dificultad} sobre ${tema}, con ${alternativas} alternativas por pregunta. Incluye también la respuesta correcta, asegurándote de intercalarla entre las alternativas. Formatea cada pregunta de la siguiente manera:
+    1. Pregunta.
+    2. Alternativa a)
+    3. Alternativa b)
+    4. Alternativa c)
+    5. Alternativa d)
+    6. Respuesta correcta: [Letra de la respuesta correcta]`;
 
-    setTimeout(() => enviarPrompt(promptValue), 100);
+    // Llamar a la función directamente sin setTimeout
+    enviarPrompt(promptValue);
   };
 
   const enviarPrompt = async (prompt) => {
@@ -67,16 +75,21 @@ const PrincPg = () => {
       }
 
       const response = await TeacherService.createPrompt(prompt, token);
-      console.log("Respuesta completa:", response);
 
       if (localStorage.getItem("balotario")) {
         localStorage.removeItem("balotario");
-      } else {
-        localStorage.setItem("balotario", JSON.stringify(response));
       }
-     
+      // Verifica que la respuesta contiene datos válidos antes de guardarlos
+      if (response && response.length > 0) {
+        localStorage.setItem("balotario", JSON.stringify(response));
+      } else {
+        alert("No se encontraron datos válidos en la respuesta de la API.");
+        return; // No continuar si no hay datos válidos
+      }
+
       // Verificar que la respuesta contiene datos antes de redirigir
       const balotarioData = JSON.parse(localStorage.getItem("balotario"));
+      console.log("Datos en balotario:", balotarioData);
       if (balotarioData && balotarioData.length > 0) {
         navigate(`/quizDetails/${balotarioData[0].id}`);
       } else {
